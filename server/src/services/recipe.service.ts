@@ -26,4 +26,28 @@ export class RecipeService {
 
     return recipes;
   }
+
+  /**
+   * Fetch a single recipe by id, including ingredients (with names) and steps.
+   * Steps are sorted ascending by `stepNumber`.
+   */
+  async getRecipeById(id: string) {
+    const recipe = await prisma.recipe.findUnique({
+      where: { id },
+      include: {
+        ingredients: {
+          include: {
+            ingredient: {
+              select: { id: true, name: true },
+            },
+          },
+        },
+        steps: {
+          orderBy: { stepNumber: "asc" },
+        },
+      },
+    });
+
+    return recipe;
+  }
 }

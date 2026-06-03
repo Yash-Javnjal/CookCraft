@@ -2,6 +2,7 @@
 
 import express, { Application, Request, Response, NextFunction } from "express";
 import recipeRoutes from "./routes/recipe.route";
+import searchRoutes from "./routes/search.route";
 
 const app: Application = express();
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 // ─── Routes ──────────────────────────────────────────────
 
 app.use("/api/recipes", recipeRoutes);
+app.use("/api/search", searchRoutes);
 
 // Health check
 app.get("/api/health", (_req: Request, res: Response) => {
@@ -35,4 +37,7 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   });
 });
 
+console.log("APP LOADED");
+
 export default app;
+
