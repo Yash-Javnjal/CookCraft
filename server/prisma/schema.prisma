@@ -1,13 +1,94 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// prisma/schema.prisma
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum DietType {
+  VEGETARIAN
+  VEGAN
+  HIGH_PROTEIN
+  KETO
+  NONE
+}
+
+// ─── Models ──────────────────────────────────────────────
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String
+  createdAt DateTime   @default(now())
+
+  favorites Favorite[]
+}
+
+model Recipe {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageUrl    String?
+  cookTime    Int      // in minutes
+  calories    Int?
+  difficulty  Difficulty
+  cuisine     String?
+  dietType    DietType   @default(NONE)
+  createdAt   DateTime   @default(now())
+
+  steps       RecipeStep[]
+  ingredients RecipeIngredient[]
+  favorites   Favorite[]
+}
+
+model Ingredient {
+  id      String @id @default(cuid())
+  name    String @unique
+
+  recipes RecipeIngredient[]
+}
+
+model RecipeIngredient {
+  id           String @id @default(cuid())
+  recipeId     String
+  ingredientId String
+  quantity     String
+
+  recipe     Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  ingredient Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+  @@unique([recipeId, ingredientId])
+}
+
+model RecipeStep {
+  id          String @id @default(cuid())
+  recipeId    String
+  stepNumber  Int
+  instruction String
+
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([recipeId, stepNumber])
+}
+
+model Favorite {
+  id       String @id @default(cuid())
+  userId   String
+  recipeId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recipeId])
 }
