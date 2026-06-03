@@ -33,7 +33,7 @@ async function main() {
       });
     }
   } catch (error) {
-    console.error("❌ Database connection failed:", error);
+    console.error("❌ Database connection is failed:", error);
     process.exit(1);
   } finally {
     await prisma.$disconnect();
