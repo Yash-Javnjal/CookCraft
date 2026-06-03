@@ -17,7 +17,7 @@ export class RecipeController {
   getAllRecipes = async (
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<void> => {
     try {
       const recipes = await this.recipeService.getAllRecipes();
@@ -37,7 +37,7 @@ export class RecipeController {
   getRecipeById = async (
     req: Request,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ): Promise<void> => {
     try {
       const id = String(req.params.id);
@@ -55,6 +55,32 @@ export class RecipeController {
       }
 
       res.status(200).json({ success: true, data: recipe });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getCuisineName = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const name = String(req.params.name);
+
+      if (!name) {
+        res.status(400).json({ success: false, message: "Invalid cuisine" });
+        return;
+      }
+
+      const recipes = await this.recipeService.getCuisineName(name);
+
+      if (recipes.length === 0) {
+        res.status(200).json({ success: false, message: "No recipes found" });
+        return;
+      }
+
+      res.status(200).json({ success: true, data: recipes });
     } catch (error) {
       next(error);
     }

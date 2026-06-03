@@ -50,4 +50,31 @@ export class RecipeService {
 
     return recipe;
   }
+
+
+  async getCuisineName(cuisine: string){
+    const recipes = await prisma.recipe.findMany({
+        where: {cuisine:{equals: cuisine,mode: "insensitive"}},
+       select: {
+        title: true, 
+        cuisine: true,
+        ingredients: {
+          select: {
+            quantity:true,
+            ingredient:{
+              select:{
+                name:true
+              }
+            }
+          }
+        },
+        steps:{
+          select:{stepNumber:true, instruction:true},
+          orderBy : {stepNumber: "asc"}
+        }       
+       }
+    });
+
+    return recipes;
+  }
 }

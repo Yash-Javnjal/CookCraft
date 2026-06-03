@@ -20,7 +20,7 @@ export class SearchController {
     next: NextFunction
   ): Promise<void> => {
     try {
-      const { ingredients } = req.body;
+      const { ingredients} = req.body;
 
       if (!Array.isArray(ingredients)) {
         res
