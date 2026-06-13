@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CookCraft - Our Story</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;family=Literata:ital,wght@1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#44483b",
+                        "tertiary-fixed": "#d2eca2",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "background": "#fcf9f0",
+                        "primary": "#1d2e00",
+                        "on-primary-container": "#96b564",
+                        "surface-dim": "#dddad1",
+                        "on-primary-fixed-variant": "#354e07",
+                        "on-tertiary-container": "#9ab36f",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#121f00",
+                        "on-background": "#1c1c17",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#394d14",
+                        "surface-tint": "#4c6720",
+                        "surface": "#fcf9f0",
+                        "on-secondary-container": "#612500",
+                        "inverse-primary": "#b2d17d",
+                        "secondary-fixed": "#ffdbcc",
+                        "outline": "#75796a",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1c1c17",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#b6d088",
+                        "secondary": "#a04100",
+                        "surface-variant": "#e5e2da",
+                        "primary-fixed": "#cdee97",
+                        "inverse-surface": "#31312b",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#b2d17d",
+                        "on-secondary-fixed": "#351000",
+                        "inverse-on-surface": "#f4f1e8",
+                        "surface-container-low": "#f6f3ea",
+                        "secondary-fixed-dim": "#ffb693",
+                        "tertiary-container": "#31450d",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#1d2e00",
+                        "surface-container-high": "#ebe8df",
+                        "outline-variant": "#c5c8b7",
+                        "primary-container": "#2e4600",
+                        "surface-container": "#f1eee5",
+                        "surface-container-highest": "#e5e2da",
+                        "on-tertiary-fixed": "#131f00",
+                        "surface-bright": "#fcf9f0",
+                        "secondary-container": "#ff7a2e",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Montserrat"],
+                        "body-lg": ["Montserrat"],
+                        "headline-lg": ["Playfair Display"],
+                        "label-caps": ["Montserrat"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "label-accent": ["Literata"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["36px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-accent": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .noise-bg {
+            position: relative;
+        }
+        .noise-bg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 10;
+            mix-blend-mode: multiply;
+        }
+        .soft-shadow {
+            box-shadow: 0 8px 30px rgba(46, 70, 0, 0.06);
+        }
+        .flour-particle {
+            position: fixed;
+            background-color: rgba(255, 255, 240, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased noise-bg">
+<!-- TopNavBar -->
+<nav class="bg-background/95 dark:bg-inverse-surface/95 backdrop-blur-sm shadow-sm w-full sticky top-0 z-50">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-4">
+<a href="home.html" class="font-headline-lg text-headline-lg text-primary dark:text-inverse-primary cursor-pointer" id="cookcraft-logo">CookCraft</a>
+<div class="hidden md:flex gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary hover:opacity-80 transition-opacity duration-300 font-body-md text-body-md" href="home.html">Home</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary hover:opacity-80 transition-opacity duration-300 font-body-md text-body-md" href="discover.html">Discover</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary hover:opacity-80 transition-opacity duration-300 font-body-md text-body-md" href="cuisine.html">Cuisines</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary hover:opacity-80 transition-opacity duration-300 font-body-md text-body-md" href="journal.html">Journal</a>
+<a class="text-secondary border-b-2 border-secondary pb-1 font-body-md" href="about.html">About</a></div><div class="hidden md:flex items-center gap-6">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="">Favorites</span>
+</button>
+<a href="login.html" class="bg-primary text-on-primary px-6 py-2 rounded font-body-md text-body-md hover:opacity-80 transition-opacity duration-300 shadow-sm border border-on-primary-container/30 inline-block">Login/Profile</a>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined" style="font-size: 28px;">menu</span>
+</button>
+</div>
+</nav>
+<main class="w-full">
+<!-- Section 1: Hero - The Heart of the Home -->
+<section class="relative w-full h-[819px] flex items-center justify-center overflow-hidden mb-section-gap">
+<div class="absolute inset-0 z-0">
+<img alt="Rustic Kitchen" class="w-full h-full object-cover" data-alt="A cinematic, wide-angle shot of a sun-drenched rustic kitchen. Warm golden hour light streams through a window onto a heavy, scarred wooden table. On the table sits an imperfect ceramic bowl overflowing with fresh, vibrant ingredients—tomatoes, herbs, and garlic. The mood is nostalgic, inviting, and grounded, evoking a sense of handcrafted culinary artistry. The color palette emphasizes warm earthy tones, deep greens, and warm ivory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzjXKZ4hPLUf-EkEZWwHY8X3dKuFCjbLmrf92ca2HcdLV5HWy7CU5xe6EGv-V3_zfnyxo_YR_hL-zw9G4bdrnASTUPV5-auhCzzGPLuUCo0VApljyQtdzpiuRPVD65ac2KZpoB-AMOBeaSMhFhkWG1K2tDbU50QMaI8y-v1OcH9ys06Gbhr5wSpkGHrCRe4J1aZtcoRZhmTz3-b-m87YCuGZXBFhQHmW31oAJmC0obZCaK8QkqaI_EnkvuXqf1A-67K8HF9msJGJPt">
+<div class="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
+</div>
+<div class="relative z-10 text-center px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto">
+<h1 class="font-headline-xl text-headline-xl md:text-[64px] text-surface-container-lowest mb-6 drop-shadow-md">Every Great Dish Begins with a Story.</h1>
+<p class="font-body-lg text-body-lg text-inverse-on-surface max-w-2xl mx-auto drop-shadow">At CookCraft, we believe the most extraordinary meals aren't found in cookbooks, but in the ingredients already waiting in your pantry.</p>
+</div>
+</section>
+<!-- Section 2: The Art of the Scraps -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap mb-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+<div class="order-2 md:order-1 relative">
+<div class="bg-surface-container-lowest p-4 pb-12 rounded-sm soft-shadow transform -rotate-2 relative z-10">
+<img alt="Ingredients" class="w-full h-auto object-cover rounded-sm" data-alt="A close-up, highly textured macro shot of 'kitchen scraps' arranged beautifully on an aged parchment background. A single, slightly bruised tomato, a sprig of dried rosemary, and the heel of rustic bread are composed elegantly, bathed in soft, diffused window light. The focus is sharp on the textures of the food, highlighting the beauty in imperfection. The overall tone is grounded, organic, and editorial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKAkoIHzYUu9Uk7mQkiY6G9dyCJkm2dWhwhqKJ5SLVd8mIL6WYpalaJiu7PLNR-I8oc08i03KqhyNpsZZb1rmv1TY1pNkmwSqsU-UvJPrF92Cj51GfK1YTmtkdzu81tvXhk6QbEtG01hQzM0RDoD5PVl8M70-XuPivEX6oZ30RjC3BoaHC77JVmc7zpy_yepeWmZL_oX0LVIFbr6iFfTNatJXemm7AxNCdZ-PSr7LwZYQ_Ff-jUxI9p84_d1pq26jtJqu0m_PQL4T0">
+<p class="absolute bottom-4 left-6 font-label-accent text-label-accent text-outline opacity-80 italic">Honoring the humble ingredient.</p>
+</div>
+<div class="absolute -top-6 -right-6 w-32 h-32 bg-secondary-fixed rounded-full mix-blend-multiply filter blur-2xl opacity-40"></div>
+</div>
+<div class="order-1 md:order-2 flex flex-col justify-center">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">Honoring the Ingredient.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">A lonely sprig of rosemary. The heel of a loaf. Three sun-ripened tomatoes. We see potential where others see waste.</p>
+<p class="font-body-md text-body-md text-on-surface-variant border-l-4 border-secondary/40 pl-4 py-2 italic bg-surface-container/30">CookCraft was born from the belief that cooking is an act of preservation—of flavor, of resources, and of the planet.</p>
+</div>
+</div>
+</section>
+<!-- Section 3: Ingredient Matching -->
+<section class="bg-surface-container-low py-section-gap mb-section-gap relative overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16 relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Discovery at Your Fingertips.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Input what you have, and let our culinary intuition guide you to your next favorite meal.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+<!-- Note 1 -->
+<div class="bg-[#ffffeb] p-8 rounded shadow-[0_4px_15px_rgba(46,70,0,0.05)] transform rotate-1 hover:rotate-0 transition-transform duration-300 relative">
+<span class="material-symbols-outlined absolute top-4 right-4 text-outline/40">kitchen</span>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 border-b border-outline-variant/30 pb-2">1. Inventory</h3>
+<p class="font-label-accent text-label-accent text-on-surface-variant italic leading-relaxed">Open your pantry. Tell us about the half-onion, the wilting spinach, the lone egg. Every ingredient is a starting point.</p>
+</div>
+<!-- Note 2 -->
+<div class="bg-surface-container-lowest p-8 rounded shadow-[0_4px_15px_rgba(46,70,0,0.05)] transform -rotate-1 hover:rotate-0 transition-transform duration-300 relative border-t-4 border-primary">
+<span class="material-symbols-outlined absolute top-4 right-4 text-outline/40" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-4 border-b border-outline-variant/30 pb-2">2. Match</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Our engine sifts through thousands of culinary narratives, finding the perfect flavor profiles that unite your scraps into a cohesive dish.</p>
+</div>
+<!-- Note 3 -->
+<div class="bg-[#f9f5ed] p-8 rounded shadow-[0_4px_15px_rgba(46,70,0,0.05)] transform rotate-2 hover:rotate-0 transition-transform duration-300 relative">
+<span class="material-symbols-outlined absolute top-4 right-4 text-outline/40">restaurant_menu</span>
+<h3 class="font-headline-md text-headline-md text-secondary mb-4 border-b border-outline-variant/30 pb-2">3. Craft</h3>
+<p class="font-label-accent text-label-accent text-on-surface-variant italic leading-relaxed">Follow the story. We provide flexible guidance, encouraging you to taste, adjust, and make the recipe truly your own.</p>
+</div>
+</div>
+</div>
+<!-- Decorative background elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-tertiary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/4"></div>
+<div class="absolute bottom-0 left-0 w-80 h-80 bg-primary-fixed rounded-full mix-blend-multiply filter blur-3xl opacity-20 translate-y-1/3 -translate-x-1/4"></div>
+</section>
+<!-- Section 4: A Global Table -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap mb-24">
+<div class="flex flex-col md:flex-row gap-12 items-center bg-surface-container-lowest soft-shadow rounded-lg overflow-hidden">
+<div class="w-full md:w-1/2 h-64 md:h-[500px]">
+<img alt="Global Spices" class="w-full h-full object-cover" data-alt="A top-down, magazine-style shot of a rustic wooden table heavily laden with small bowls containing vibrant spices, fresh herbs, and diverse global ingredients. Soft, directional light mimics a kitchen window, casting gentle shadows that enhance the tactile quality of the coarse salt, bright yellow turmeric, and deep red chilies. The composition is structured yet organic, communicating a sense of worldly exploration and culinary richness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf8pqf0N_ko3aRG5B7BTIUhwzMMZ-nTI6o3e_BgGSpXEpU9xQMvn-gsB9TYvdWNUpEirvHg5WAPg8A4BeL_-zuRGtldyYZ9E0eMbb2pE2bBkyEYuYwW6VnQ_vd0OEpI0t2kIHOBZ1OuoaTbDjohJegJXosg2R8csPY4uiacHkY14jwRWPV5vnVgGEzZoU9lBOvrXw3A3UD6y8uwmGZOpfCv5e0AlE_2DZDTtzvddetzum58o2ujDx2HVedBC4qmvRC5GzRIeN3UoZO">
+</div>
+<div class="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-secondary mb-4 tracking-widest">Wanderlust</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">Travel Without Leaving Your Kitchen.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8">From the bustling markets of Oaxaca to the quiet trattorias of Tuscany, we bring the world's culinary heritage to your stove, tailored to your palate and what you have on hand.</p>
+<button class="self-start text-primary border-b border-primary pb-1 font-body-md text-body-md hover:text-secondary hover:border-secondary transition-colors duration-300 flex items-center gap-2">
+                        Start Exploring <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container dark:bg-inverse-surface border-t border-outline-variant/20 w-full mt-section-gap flat">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-start gap-8">
+<div class="font-headline-md text-headline-md text-primary dark:text-inverse-primary">
+                CookCraft
+            </div>
+<div class="flex flex-wrap gap-6 font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-primary hover:text-secondary transition-colors duration-200 cursor-default" href="#">The Story</a>
+<a class="text-on-surface-variant hover:text-primary hover:text-secondary transition-colors duration-200 cursor-default" href="#">Chef Collective</a>
+<a class="text-on-surface-variant hover:text-primary hover:text-secondary transition-colors duration-200 cursor-default" href="#">Journal Archive</a>
+<a class="text-on-surface-variant hover:text-primary hover:text-secondary transition-colors duration-200 cursor-default" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary hover:text-secondary transition-colors duration-200 cursor-default" href="#">Terms of Service</a>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant w-full md:w-auto text-left md:text-right mt-8 md:mt-0 opacity-70">
+                © 2024 CookCraft. A Cinematic Culinary Experience.
+            </div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant/30 shadow-[0_-4px_12px_rgba(46,70,0,0.08)] z-50 rounded-t-xl">
+<a href="{{DATA:SCREEN:SCREEN_4}}" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant Active: scale-95 transition-transform duration-150 p-2 rounded-xl"><span class="material-symbols-outlined mb-1">explore</span><span class="font-label-caps text-label-caps text-[10px]">Explore</span></a>
+<a href="{{DATA:SCREEN:SCREEN_23}}" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant Active: scale-95 transition-transform duration-150 p-2 rounded-xl"><span class="material-symbols-outlined mb-1">menu_book</span><span class="font-label-caps text-label-caps text-[10px]">Journal</span></a>
+<a href="{{DATA:SCREEN:SCREEN_13}}" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant Active: scale-95 transition-transform duration-150 p-2 rounded-xl"><span class="material-symbols-outlined mb-1">outdoor_grill</span><span class="font-label-caps text-label-caps text-[10px]">Kitchen</span></a>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant active:bg-surface-variant Active: scale-95 transition-transform duration-150 p-2 rounded-xl">
+<span class="material-symbols-outlined mb-1">inventory_2</span>
+<span class="font-label-caps text-label-caps text-[10px]">Pantry</span>
+</div>
+</nav>
+<script>
+        // Flour fall interaction
+        document.getElementById('cookcraft-logo').addEventListener('click', function(e) {
+            for (let i = 0; i < 20; i++) {
+                createFlourParticle(e.clientX, e.clientY);
+            }
+        });
+
+        function createFlourParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.classList.add('flour-particle');
+            
+            // Randomize size, spread, and duration
+            const size = Math.random() * 4 + 2;
+            const spreadX = (Math.random() - 0.5) * 100;
+            const duration = Math.random() * 1.5 + 1;
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            
+            // Apply slight horizontal drift during fall
+            particle.style.transform = `translateX(${spreadX}px)`;
+            particle.style.animationDuration = `${duration}s`;
+            
+            document.body.appendChild(particle);
+            
+            // Clean up
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+    </script>
+
+
+</body></html>

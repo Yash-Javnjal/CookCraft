@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cuisine Explorer - CookCraft</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f1eee5",
+                        "secondary": "#a04100",
+                        "primary-fixed": "#cdee97",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "inverse-on-surface": "#f4f1e8",
+                        "surface-dim": "#dddad1",
+                        "on-tertiary-container": "#9ab36f",
+                        "surface-container-high": "#ebe8df",
+                        "outline-variant": "#c5c8b7",
+                        "tertiary-container": "#31450d",
+                        "primary-container": "#2e4600",
+                        "surface-bright": "#fcf9f0",
+                        "surface": "#fcf9f0",
+                        "surface-tint": "#4c6720",
+                        "on-secondary-fixed": "#351000",
+                        "on-surface": "#1c1c17",
+                        "on-primary-container": "#96b564",
+                        "primary": "#1d2e00",
+                        "on-primary-fixed": "#121f00",
+                        "inverse-surface": "#31312b",
+                        "background": "#fcf9f0",
+                        "secondary-fixed-dim": "#ffb693",
+                        "surface-container-low": "#f6f3ea",
+                        "inverse-primary": "#b2d17d",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#ff7a2e",
+                        "on-surface-variant": "#44483b",
+                        "on-primary-fixed-variant": "#354e07",
+                        "outline": "#75796a",
+                        "tertiary-fixed-dim": "#b6d088",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#394d14",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#d2eca2",
+                        "primary-fixed-dim": "#b2d17d",
+                        "on-secondary-container": "#612500",
+                        "surface-variant": "#e5e2da",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#1d2e00",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdbcc",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1c1c17",
+                        "surface-container-highest": "#e5e2da",
+                        "on-tertiary-fixed": "#131f00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Montserrat", "sans-serif"],
+                        "label-caps": ["Montserrat", "sans-serif"],
+                        "label-accent": ["Literata", "serif"],
+                        "headline-lg": ["Playfair Display", "serif"],
+                        "headline-md": ["Playfair Display", "serif"],
+                        "headline-lg-mobile": ["Playfair Display", "serif"],
+                        "headline-xl": ["Playfair Display", "serif"],
+                        "body-md": ["Montserrat", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "label-accent": ["16px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "headline-lg": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F5F2E9; /* Aged Paper */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+        .texture-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            z-index: 10;
+        }
+        .editorial-shadow {
+            box-shadow: 0 4px 24px -6px rgba(46, 70, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="hidden md:flex flex-col bg-surface/90 backdrop-blur-md dark:bg-surface-dim/90 docked full-width top-0 sticky z-40 bg-surface dark:bg-surface-dim shadow-[0_2px_15px_-3px_rgba(46,70,0,0.08)]">
+<div class="flex justify-between items-center w-full px-margin-desktop py-6 max-w-container-max mx-auto">
+<div class="text-headline-lg font-headline-lg text-primary dark:text-inverse-primary italic">CookCraft</div>
+<nav class="flex gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300" href="home.html">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim border-b border-secondary/30 pb-1 text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300 opacity-80 scale-[0.99] transition-transform" href="discover.html">Discovery</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300" href="cuisine.html">Cuisine</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300" href="journal.html">Journal</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300" href="about.html">About</a>
+</nav>
+<div class="flex gap-4 text-primary dark:text-inverse-primary">
+<button class="hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu_book</span>
+</button>
+<button class="hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bookmark</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-16">
+<!-- Hero Section -->
+<section class="mb-16 md:mb-24 text-center">
+<h1 class="text-headline-xl font-headline-xl text-primary mb-4">The Culinary Atlas</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl mx-auto italic font-label-accent text-label-accent">Embark on a journey through global flavors. Combine centuries of tradition with the ingredients resting in your pantry.</p>
+</section>
+<!-- Search & Combine Interface -->
+<section class="mb-16 bg-[#FFFFF0] editorial-shadow rounded-xl p-8 relative overflow-hidden border border-outline-variant/30">
+<div class="texture-overlay"></div>
+<div class="relative z-20 flex flex-col md:flex-row items-center gap-6">
+<div class="w-full md:w-1/3">
+<label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 uppercase tracking-widest">Select Region</label>
+<div class="relative">
+<select class="w-full bg-transparent border-b border-outline-variant pb-2 text-body-lg font-body-lg focus:outline-none focus:border-secondary appearance-none rounded-none">
+<option>Any Region</option>
+<option>Italian</option>
+<option>Indian</option>
+<option>Japanese</option>
+<option>Mexican</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 top-1 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex items-center justify-center text-outline-variant px-4">
+<span class="material-symbols-outlined text-2xl font-light">add</span>
+</div>
+<div class="w-full md:w-1/2 flex-grow">
+<label class="block text-label-caps font-label-caps text-on-surface-variant mb-2 uppercase tracking-widest">Pantry Ingredients</label>
+<div class="relative flex items-center border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-outline mr-2">search</span>
+<input class="w-full bg-transparent text-body-lg font-body-lg focus:outline-none focus:border-secondary border-none p-0 focus:ring-0" placeholder="e.g., Eggs, Tomatoes, Garlic..." type="text"/>
+</div>
+<!-- Chips Area -->
+<div class="flex flex-wrap gap-2 mt-3">
+<span class="bg-[#31450d]/10 text-primary px-3 py-1 rounded-full text-label-caps font-label-caps flex items-center gap-1">Eggs <button><span class="material-symbols-outlined text-[14px]">close</span></button></span>
+<span class="bg-[#31450d]/10 text-primary px-3 py-1 rounded-full text-label-caps font-label-caps flex items-center gap-1">Cheese <button><span class="material-symbols-outlined text-[14px]">close</span></button></span>
+</div>
+</div>
+<div class="w-full md:w-auto mt-4 md:mt-0 pt-6">
+<button class="w-full md:w-auto bg-primary text-on-primary px-8 py-3 rounded-lg text-label-caps font-label-caps hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2 border-t border-white/20" onclick="window.location.href='featured-recipe.html'">
+<span class="material-symbols-outlined text-[18px]"></span>
+                        Explore Combinations
+                    </button>
+</div>
+</div>
+</section>
+<!-- Bento Grid of Cuisines -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Italian - Large Featured -->
+<article class="col-span-1 md:col-span-8 group relative rounded-xl overflow-hidden editorial-shadow h-[400px] cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A cinematic, high-end editorial shot of fresh handmade pasta lightly dusted with flour on a rustic wooden table. A glass of deep red wine and fresh basil leaves rest in the warm, golden hour sunlight pouring through a window. The style is reminiscent of a high-end culinary magazine with rich textures and warm romantic lighting, emphasizing a handcrafted, tactile aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbE5mvbCWy2SaXC_SBvBVdVYaGfZJ6T4gMMaK3Ln3t5LAedG_bP_eiHT1gShZOH0uORG7i25iYPj8oyLL5qIBVQPx8Kuazt_gju5SZxNCPCzJREWtSjXKgGsJFfOXqQPCyv6IFwaG0E7_V4178e56rAUNCDBFgEtypryssKFx7GPz98ldw_juQqFO4yfnT5R-PwYwxf1dH60Fp1vbpXEgavCFUAcZcbjpVvBWki3IkxFVrV-QcZIEty6zBJvxNqUcuSs6P23XTWNi7');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 text-on-primary">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-secondary-fixed">restaurant_menu</span>
+<span class="text-label-caps font-label-caps tracking-widest text-secondary-fixed">Mediterranean</span>
+</div>
+<h2 class="text-headline-lg font-headline-lg mb-2">Italian</h2>
+<p class="text-body-md font-body-md text-surface-container-high max-w-lg hidden md:block">The poetry of simplicity. Where a handful of pristine ingredients—flour, water, olive oil, and tomatoes—transform into profound comfort.</p>
+</div>
+</article>
+<!-- Japanese - Tall -->
+<article class="col-span-1 md:col-span-4 group relative rounded-xl overflow-hidden editorial-shadow h-[400px] cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A minimalist, top-down editorial photograph of meticulously arranged sushi and sashimi on an elegant dark ceramic plate. Beside it rests a traditional bamboo whisk and a bowl of vibrant green matcha tea. The lighting is soft and diffused, highlighting the deep, rich colors of the fresh fish against a weathered, dark wood background. The overall mood is precise, serene, and sophisticated." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgp5GuWBbae7fW807n-BRYR3-Zi0swdeTtgLyU-9FU6G_TSGXucXnjs2pc4KZ3HMZLANFzwDIeDNLItoT_p_1gJUme52qg-VfuSJ1oHIz4HgO5UE1EvMjBo016xvf6JCaS5ji4Fo0pL0OyJ3zZ_Rlmdb8GoFhSHnX8gA_8-eykewKIRLOTp4LvcbMjKENKMRYcqj-B3Rv07q-RIEiilxFv07UTj_asHs-xcLNUb3GuP8S2UvzAFHg0cyk_k96wbMJ_TQV4Icnx8WBA');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 text-on-primary">
+<span class="text-label-caps font-label-caps tracking-widest text-tertiary-fixed mb-1 block">East Asia</span>
+<h2 class="text-headline-md font-headline-md mb-2">Japanese</h2>
+<p class="text-body-md font-body-md text-surface-container-high line-clamp-2">A masterclass in restraint and reverence for seasonal perfection.</p>
+</div>
+</article>
+<!-- Indian - Wide -->
+<article class="col-span-1 md:col-span-6 group relative rounded-xl overflow-hidden editorial-shadow h-[300px] cursor-pointer bg-[#FFFFF0] border border-outline-variant/20">
+<div class="flex h-full">
+<div class="w-1/2 p-6 flex flex-col justify-center relative z-10">
+<div class="texture-overlay"></div>
+<span class="text-label-caps font-label-caps tracking-widest text-secondary mb-2">South Asia</span>
+<h2 class="text-headline-md font-headline-md text-primary mb-3">Indian</h2>
+<p class="text-body-md font-body-md text-on-surface-variant italic font-label-accent text-label-accent">A symphony of layered spices, blooming in ghee, creating deep, complex curries that tell stories of ancient trade routes.</p>
+<div class="mt-4 flex gap-2">
+<span class="text-xs bg-surface-container text-primary px-2 py-1 rounded">Turmeric</span>
+<span class="text-xs bg-surface-container text-primary px-2 py-1 rounded">Cumin</span>
+</div>
+</div>
+<div class="w-1/2 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A warm, highly textured editorial shot of vibrant Indian spices arranged in small rustic bowls. A copper pot of rich, dark red butter chicken curry sits next to fresh, charred naan bread on a weathered wooden table. The lighting is moody and warm, emphasizing the rich ochres, deep reds, and earthy greens of the cuisine in a magazine-quality layout." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAmovZluTq08QkKUBZ4iwpO3ldon6eG9hIyBTYIPahWjo9gkACBJSnO-6dPhsU1GXZnkpAu9942ysWa50S5mqlv374hcIjQE2AGRHFfxhbo5QyFYpjRsIwwwH7JqdycRJOcD3LLb4BWMgxdBlpz1Q96XKFfmJxcZLBL8ul1J8vdR3rnWoO072DbKQC4PVrSBN-00Jbq71E5ghEydw4pp48moaTv8gogym8Q5qwMt8qcZgMW-H3-g0cjCas5l1Y3x8SzE_izpweTG5jo');"></div>
+</div>
+</div>
+</article>
+<!-- Mexican - Wide -->
+<article class="col-span-1 md:col-span-6 group relative rounded-xl overflow-hidden editorial-shadow h-[300px] cursor-pointer bg-[#FFFFF0] border border-outline-variant/20">
+<div class="flex h-full flex-row-reverse">
+<div class="w-1/2 p-6 flex flex-col justify-center relative z-10">
+<div class="texture-overlay"></div>
+<span class="text-label-caps font-label-caps tracking-widest text-secondary mb-2">Latin America</span>
+<h2 class="text-headline-md font-headline-md text-primary mb-3">Mexican</h2>
+<p class="text-body-md font-body-md text-on-surface-variant italic font-label-accent text-label-accent">Vibrant, fiery, and deeply rooted in indigenous earthiness. The magic of masa, chillies, and slow-roasted meats.</p>
+<div class="mt-4 flex gap-2">
+<span class="text-xs bg-surface-container text-primary px-2 py-1 rounded">Masa</span>
+<span class="text-xs bg-surface-container text-primary px-2 py-1 rounded">Cilantro</span>
+</div>
+</div>
+<div class="w-1/2 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A bright, energetic editorial photo of a spread of authentic Mexican street tacos on handmade corn tortillas. Garnishes of fresh cilantro, diced white onions, and wedges of lime rest nearby alongside a bowl of vibrant green tomatillo salsa. The scene is set on a distressed painted wood table, shot from a slight top-down angle with bright, natural daylight highlighting the fresh ingredients." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuByRBqK0mUcBAXn0wnoUFPya5xnLceaIgASedfywc7wPMaIwg719eDM0BG2a4Ji4b3xzBjxkyDPn_soZfxQ--Mq7xA41RPFbjxYvM0pqi28T3Rj-8UQFeCRoF7BOQjsL-6MbM9QzCtc_oue8Y9XKwAh4Yun-T8F9ochJX8t5xDaVilMjB5Rl-fyJoGsxkxtPFJrYy3mdwagv4pTnrAJq-v_DRNSLmjEd1zV-eAifCDRdb_G3jdijizSF_X_ZRQrLxK9VY2FQOwWmSX8');"></div>
+</div>
+</div>
+</article>
+</section>
+<!-- Chef's Note Sticky -->
+<section class="mt-20 flex justify-center">
+<div class="bg-[#FFFCE0] p-6 max-w-sm rotate-[-2deg] editorial-shadow border border-yellow-200/50">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-xl">push_pin</span>
+<div>
+<p class="font-label-accent text-label-accent italic text-on-surface-variant leading-relaxed">
+                            "Don't be afraid to cross borders. A touch of miso in an Italian Bolognese adds unexpected umami depth. The pantry is a passport."
+                        </p>
+<p class="mt-3 text-label-caps font-label-caps text-secondary text-right">- Chef Collective</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden bg-surface-container dark:bg-inverse-surface shadow-[0_-4px_20px_-5px_rgba(46,70,0,0.1)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-label-caps font-label-caps mt-1">Discover</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bookmark_heart</span>
+<span class="text-label-caps font-label-caps mt-1">Saved</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">edit_note</span>
+<span class="text-label-caps font-label-caps mt-1">Notes</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person_outline</span>
+<span class="text-label-caps font-label-caps mt-1">Profile</span>
+</button>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant/20 full-width mt-auto hidden md:block">
+<div class="flex flex-col md:flex-row justify-between items-start w-full px-margin-desktop py-section-gap max-w-container-max mx-auto text-on-surface dark:text-inverse-on-surface">
+<div class="mb-8 md:mb-0">
+<div class="text-headline-md font-headline-md text-primary dark:text-inverse-primary mb-4 italic">CookCraft</div>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-sm">© 2024 CookCraft. Every great recipe begins with what you already have.</p>
+</div>
+<div class="flex flex-col md:flex-row gap-6 md:gap-12">
+<nav class="flex flex-col gap-3">
+<a class="text-body-md font-body-md text-on-surface-variant dark:text-surface-variant hover:text-secondary underline underline-offset-4 transition-all" href="#">The Story</a>
+<a class="text-body-md font-body-md text-on-surface-variant dark:text-surface-variant hover:text-secondary underline underline-offset-4 transition-all" href="#">Chef Collective</a>
+</nav>
+<nav class="flex flex-col gap-3">
+<a class="text-body-md font-body-md text-on-surface-variant dark:text-surface-variant hover:text-secondary underline underline-offset-4 transition-all" href="#">Terms of Art</a>
+<a class="text-body-md font-body-md text-on-surface-variant dark:text-surface-variant hover:text-secondary underline underline-offset-4 transition-all" href="#">Journal Archive</a>
+</nav>
+</div>
+</div>
+</footer>
+</body></html>

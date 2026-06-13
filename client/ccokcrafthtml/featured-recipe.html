@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CookCraft - Featured Recipes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#d2eca2",
+                      "on-tertiary-fixed-variant": "#394d14",
+                      "surface-bright": "#fcf9f0",
+                      "outline-variant": "#c5c8b7",
+                      "inverse-surface": "#31312b",
+                      "on-secondary-container": "#612500",
+                      "secondary-container": "#ff7a2e",
+                      "background": "#fcf9f0",
+                      "on-secondary": "#ffffff",
+                      "primary": "#1d2e00",
+                      "secondary": "#a04100",
+                      "on-tertiary-fixed": "#131f00",
+                      "error-container": "#ffdad6",
+                      "on-surface": "#1c1c17",
+                      "primary-fixed": "#cdee97",
+                      "on-tertiary-container": "#9ab36f",
+                      "inverse-primary": "#b2d17d",
+                      "tertiary": "#1d2e00",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#44483b",
+                      "surface": "#fcf9f0",
+                      "primary-fixed-dim": "#b2d17d",
+                      "primary-container": "#2e4600",
+                      "surface-tint": "#4c6720",
+                      "on-error-container": "#93000a",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#b6d088",
+                      "surface-variant": "#e5e2da",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#7a3000",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e5e2da",
+                      "on-secondary-fixed": "#351000",
+                      "on-primary-fixed-variant": "#354e07",
+                      "surface-dim": "#dddad1",
+                      "on-primary-fixed": "#121f00",
+                      "tertiary-container": "#31450d",
+                      "on-background": "#1c1c17",
+                      "surface-container-high": "#ebe8df",
+                      "secondary-fixed-dim": "#ffb693",
+                      "on-primary": "#ffffff",
+                      "surface-container-low": "#f6f3ea",
+                      "surface-container": "#f1eee5",
+                      "on-primary-container": "#96b564",
+                      "secondary-fixed": "#ffdbcc",
+                      "outline": "#75796a",
+                      "inverse-on-surface": "#f4f1e8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-desktop": "64px",
+                      "section-gap": "80px",
+                      "gutter": "24px",
+                      "margin-mobile": "20px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "montserrat"
+                      ],
+                      "headline-lg-mobile": [
+                              "playfairDisplay"
+                      ],
+                      "body-lg": [
+                              "montserrat"
+                      ],
+                      "label-accent": [
+                              "literata"
+                      ],
+                      "headline-md": [
+                              "playfairDisplay"
+                      ],
+                      "body-md": [
+                              "montserrat"
+                      ],
+                      "headline-xl": [
+                              "playfairDisplay"
+                      ],
+                      "headline-lg": [
+                              "playfairDisplay"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-accent": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "36px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        /* Texture overlay for paper feel */
+        .texture-overlay {
+            position: relative;
+        }
+        .texture-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            z-index: 10;
+        }
+        
+        /* Recipe Card Hover Effect (Lifting Page) */
+        .recipe-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: bottom left;
+        }
+        .recipe-card:hover {
+            transform: rotate(-1deg) translateY(-8px) translateX(4px);
+            box-shadow: 12px 12px 30px -10px rgba(46,70,0,0.15), -4px -4px 10px rgba(255,255,255,0.5);
+        }
+        
+        /* Custom Checkbox */
+        .hand-drawn-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #75796a;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            background-color: transparent;
+            transition: border-color 0.2s;
+        }
+        .hand-drawn-checkbox:checked {
+            border-color: #a04100;
+        }
+        .hand-drawn-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #a04100;
+            font-size: 14px;
+            font-weight: bold;
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md text-body-md texture-overlay selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
+<!-- TopAppBar -->
+<header class="bg-surface/90 backdrop-blur-md dark:bg-surface-dim/90 text-primary dark:text-inverse-primary docked full-width top-0 sticky bg-surface dark:bg-surface-dim shadow-[0_2px_15px_-3px_rgba(46,70,0,0.08)] shadow-sm z-40">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto">
+<!-- Mobile Menu Icon (Placeholder for now) -->
+<button class="md:hidden p-2 text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Brand Logo -->
+<div class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary dark:text-inverse-primary italic">
+                CookCraft
+            </div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex space-x-8">
+<a class="text-on-surface-variant dark:text-surface-variant text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300" href="home.html">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim border-b border-secondary/30 pb-1 text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300 opacity-80 scale-[0.99] transition-transform" href="discover.html">Discovery</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300" href="cuisine.html">Cuisine</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300" href="journal.html">Journal</a>
+<a class="text-on-surface-variant dark:text-surface-variant text-label-accent font-label-accent hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-300" href="about.html">About</a>
+</nav>
+<!-- Trailing Icons -->
+<div class="flex items-center space-x-4">
+<button aria-label="menu_book" class="p-2 text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">menu_book</span>
+</button>
+<button aria-label="bookmark" class="p-2 text-on-surface-variant hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">bookmark</span>
+</button>
+</div>
+</div>
+</header>
+<main class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap">
+<!-- Section Header -->
+<div class="mb-12 md:mb-16">
+<h1 class="text-headline-lg-mobile md:text-headline-xl font-headline-lg-mobile md:font-headline-xl text-primary mb-4">Featured Recipes</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">Curated seasonal dishes that blend technique with comfort. Discover your next kitchen project.</p>
+</div>
+<!-- Recipe Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+<!-- Card 1 -->
+<article class="recipe-card bg-[#FFFFF0] rounded-xl overflow-hidden shadow-[0_4px_15px_-5px_rgba(46,70,0,0.08)] flex flex-col h-full border border-surface-variant/50" onclick="window.location.href='recipe-detail.html'">
+<div class="relative h-64 w-full overflow-hidden">
+<img alt="Recipe Image" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" data-alt="A close-up, high-angle shot of a beautifully plated rustic pasta dish on a handcrafted ceramic bowl. The scene is lit by warm, diffused morning light coming from a nearby window, casting soft shadows. The overall aesthetic is akin to a high-end culinary magazine with a tactile, editorial feel. Colors emphasize deep greens of fresh herbs, rich reds of the sauce, and warm earthy tones of the background, perfectly aligning with a sophisticated, handcrafted visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuR-bvelft3e6lYCxw90aTgRPo0inPql_8agWN0nxTT6p5ezoYEZIo-YtU6cCOVI1taCUyyD8487fA-HEZpRlzzmNwBB5i7be4rK1AQW31dgqD8RVQSn8P7BytYnnbw0i0-ANZPgMHvGT7f7xH35QtU_PKxDDt1pvaE2rqtYP-cZyycxMVN7JfH0Tt1QScH9o0k9eNx3uD-Gved8JytafkTeHSCtTMP72c5QdzSnsPfb-tfIzRmS5WjSnYoBj4P0cBUdss-ChfcNPL"/>
+<div class="absolute top-4 right-4 bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-label-caps font-label-caps backdrop-blur-sm bg-opacity-90">
+                        92% Match
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow relative texture-overlay">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-caps font-label-caps text-secondary tracking-widest uppercase">Italian</span>
+<div class="flex gap-2">
+<span class="bg-[#e5e2da] text-on-surface-variant px-2 py-0.5 rounded text-xs font-label-caps">Medium</span>
+</div>
+</div>
+<h2 class="text-headline-md font-headline-md text-primary mb-3">Rustic Tomato Basil Campanelle</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6 flex-grow">A slow-simmered classic featuring garden-fresh tomatoes and hand-rolled pasta, finished with a generous dusting of aged pecorino.</p>
+<div class="flex items-center justify-between border-t border-outline-variant/30 pt-4 mt-auto">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<div class="flex items-center gap-1" title="Cook Time">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="text-sm">45 min</span>
+</div>
+<div class="flex items-center gap-1" title="Calories">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span class="text-sm">650 kcal</span>
+</div>
+</div>
+<button aria-label="Save Recipe" class="text-primary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bookmark_add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="recipe-card bg-[#FFFFF0] rounded-xl overflow-hidden shadow-[0_4px_15px_-5px_rgba(46,70,0,0.08)] flex flex-col h-full border border-surface-variant/50 relative" onclick="window.location.href='recipe-detail.html'">
+<!-- Chef's Note Decoration -->
+<div class="absolute -top-3 -right-3 z-10 transform rotate-6 w-24 h-24 bg-[#FFF9C4] shadow-md flex items-center justify-center p-2 rounded-sm border border-[#E6EE9C]" style="clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);" onclick="window.location.href='recipe-detail.html'">
+<p class="font-label-accent text-label-accent text-secondary text-xs italic text-center transform -rotate-2">Chef's Pick</p>
+</div>
+<div class="relative h-64 w-full overflow-hidden">
+<img alt="Recipe Image" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" data-alt="A top-down, magazine-style photograph of a grilled steak sliced and served on a dark slate board, accompanied by vibrant charred asparagus. The lighting is cinematic and moody, highlighting the sear and textures of the meat with soft, directional ambient light. The scene includes scattered sea salt and a sprig of fresh rosemary, set against a subtle, grain-rich parchment-like background. The aesthetic is tactile, modern editorial, emphasizing rich organic tones and a high-polish culinary finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAARwykve1dS8oqLFjohusAoRp_IsqyL5CC3AaUtW3s0RFPzLjhuaIGvNn7Kg_gHSXwmjN633wKF5PdIJUnF8EhqCoesFhzor-DmvFzb_UQereBpaj4c6OaKfGJhKID3XgDuJMeZzOiXysPY5YRgTwUJ0I98zXkraDCI_KdoOkS0NiiKWlQ-nzqb03nrmYzFSiuYrNfWT3CIFGJFilqWDPSd-RhZcfOzKqoKmQ3iNYJx42SpQ9gactm-U9pu0wJMTxs1WHd1hBdaLw7"/>
+<div class="absolute top-4 right-4 bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-label-caps font-label-caps backdrop-blur-sm bg-opacity-90 z-20">
+                        85% Match
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow relative texture-overlay">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-caps font-label-caps text-secondary tracking-widest uppercase">Steakhouse</span>
+<div class="flex gap-2">
+<span class="bg-[#e5e2da] text-on-surface-variant px-2 py-0.5 rounded text-xs font-label-caps">Hard</span>
+</div>
+</div>
+<h2 class="text-headline-md font-headline-md text-primary mb-3">Charred Ribeye &amp; Asparagus</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6 flex-grow">Master the perfect reverse sear for an edge-to-edge medium rare, paired with blistered seasonal greens.</p>
+<div class="flex items-center justify-between border-t border-outline-variant/30 pt-4 mt-auto">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<div class="flex items-center gap-1" title="Cook Time">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="text-sm">60 min</span>
+</div>
+<div class="flex items-center gap-1" title="Calories">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span class="text-sm">820 kcal</span>
+</div>
+</div>
+<button aria-label="Save Recipe" class="text-primary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bookmark_add</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="recipe-card bg-[#FFFFF0] rounded-xl overflow-hidden shadow-[0_4px_15px_-5px_rgba(46,70,0,0.08)] flex flex-col h-full border border-surface-variant/50" onclick="window.location.href='recipe-detail.html'">
+<div class="relative h-64 w-full overflow-hidden">
+<img alt="Recipe Image" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" data-alt="A bright, sun-drenched eye-level shot of a colorful poke bowl resting on a worn wooden table. The composition is asymmetrical, focusing on the vibrant pink tuna, green avocado, and edamame, with a soft, out-of-focus background evoking a warm, inviting kitchen. The lighting creates a nostalgic, glowing atmosphere. The overall style is reminiscent of a tactile, high-end editorial food journal, emphasizing organic imperfections and fresh, vivid culinary colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvxbZQCMOsCJaO0OkmhJfOGhhGqajP4oaDCtSQO0AZF9B6fShBRYD-bXTEi4TGDPgNkZpIEdCXhg5PSWgAMdte-m51FanvcEOsZlaOq8MwYIKluheHHvjnGJrNzKVeXzkjJwrnyiBq12u-WTS6Tn4jyX1THL_QiGYG1OS91bYcCyZqik3WeBi9Zms9-1Vp-EYpkh6pZsX9XiYdDDU1Mtfgt0HYBB8NcwcvH5mgNyVlrWryWvCi0I04I0QoM5SPIJc0hieEqmVxPrlx"/>
+<div class="absolute top-4 right-4 bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-label-caps font-label-caps backdrop-blur-sm bg-opacity-90">
+                        78% Match
+                    </div>
+</div>
+<div class="p-6 flex flex-col flex-grow relative texture-overlay">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-caps font-label-caps text-secondary tracking-widest uppercase">Hawaiian</span>
+<div class="flex gap-2">
+<span class="bg-[#e5e2da] text-on-surface-variant px-2 py-0.5 rounded text-xs font-label-caps">Easy</span>
+</div>
+</div>
+<h2 class="text-headline-md font-headline-md text-primary mb-3">Ahi Tuna Poke Bowl</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6 flex-grow">A bright, crisp assembly of sushi-grade tuna, edamame, and avocado over warm seasoned rice.</p>
+<div class="flex items-center justify-between border-t border-outline-variant/30 pt-4 mt-auto">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<div class="flex items-center gap-1" title="Cook Time">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="text-sm">20 min</span>
+</div>
+<div class="flex items-center gap-1" title="Calories">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+<span class="text-sm">450 kcal</span>
+</div>
+</div>
+<button aria-label="Save Recipe" class="text-primary hover:text-secondary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface-container dark:bg-inverse-surface text-primary dark:text-inverse-primary docked full-width bottom-0 rounded-t-xl bg-surface-container dark:bg-inverse-surface shadow-[0_-4px_20px_-5px_rgba(46,70,0,0.1)] shadow-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim font-bold scale-95 duration-200" href="#">
+<span class="material-symbols-outlined mb-1">auto_awesome</span>
+<span class="text-label-caps font-label-caps">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined mb-1">bookmark_heart</span>
+<span class="text-label-caps font-label-caps">Saved</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined mb-1">edit_note</span>
+<span class="text-label-caps font-label-caps">Notes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant opacity-70 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined mb-1">person_outline</span>
+<span class="text-label-caps font-label-caps">Profile</span>
+</a>
+</nav>
+</body></html>

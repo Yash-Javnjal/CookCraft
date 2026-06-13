@@ -1,0 +1,307 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sign In | Your Kitchen Journal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&amp;family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&amp;family=Montserrat:ital,wght@0,100..900;1,100..900&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#f1eee5",
+                        "secondary": "#a04100",
+                        "primary-fixed": "#cdee97",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "inverse-on-surface": "#f4f1e8",
+                        "surface-dim": "#dddad1",
+                        "on-tertiary-container": "#9ab36f",
+                        "surface-container-high": "#ebe8df",
+                        "outline-variant": "#c5c8b7",
+                        "tertiary-container": "#31450d",
+                        "primary-container": "#2e4600",
+                        "surface-bright": "#fcf9f0",
+                        "surface": "#fcf9f0",
+                        "surface-tint": "#4c6720",
+                        "on-secondary-fixed": "#351000",
+                        "on-surface": "#1c1c17",
+                        "on-primary-container": "#96b564",
+                        "primary": "#1d2e00",
+                        "on-primary-fixed": "#121f00",
+                        "inverse-surface": "#31312b",
+                        "background": "#fcf9f0",
+                        "secondary-fixed-dim": "#ffb693",
+                        "surface-container-low": "#f6f3ea",
+                        "inverse-primary": "#b2d17d",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#ff7a2e",
+                        "on-surface-variant": "#44483b",
+                        "on-primary-fixed-variant": "#354e07",
+                        "outline": "#75796a",
+                        "tertiary-fixed-dim": "#b6d088",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#394d14",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#d2eca2",
+                        "primary-fixed-dim": "#b2d17d",
+                        "on-secondary-container": "#612500",
+                        "surface-variant": "#e5e2da",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#1d2e00",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdbcc",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1c1c17",
+                        "surface-container-highest": "#e5e2da",
+                        "on-tertiary-fixed": "#131f00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["montserrat"],
+                        "label-caps": ["montserrat"],
+                        "label-accent": ["literata"],
+                        "headline-lg": ["playfairDisplay"],
+                        "headline-md": ["playfairDisplay"],
+                        "headline-lg-mobile": ["playfairDisplay"],
+                        "headline-xl": ["playfairDisplay"],
+                        "body-md": ["montserrat"],
+                        "handwritten": ["Caveat", "cursive"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "label-accent": ["16px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "headline-lg": ["36px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .noise-bg {
+            position: relative;
+        }
+        .noise-bg::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-effect {
+            box-shadow: 0 0 40px rgba(255, 250, 240, 0.4);
+        }
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+        .paper-texture {
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="paper"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise"/%3E%3CfeColorMatrix type="matrix" values="1 0 0 0 0  0 0.98 0 0 0  0 0.94 0 0 0  0 0 0 0.2 0" in="noise"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23paper)"/%3E%3C/svg%3E');
+        }
+        .torn-edge {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 98%, 98% 100%, 95% 98%, 93% 100%, 90% 98%, 88% 100%, 85% 99%, 83% 100%, 80% 98%, 78% 100%, 75% 99%, 73% 100%, 70% 98%, 68% 100%, 65% 99%, 63% 100%, 60% 98%, 58% 100%, 55% 99%, 53% 100%, 50% 98%, 48% 100%, 45% 99%, 43% 100%, 40% 98%, 38% 100%, 35% 99%, 33% 100%, 30% 98%, 28% 100%, 25% 99%, 23% 100%, 20% 98%, 18% 100%, 15% 99%, 13% 100%, 10% 98%, 8% 100%, 5% 99%, 3% 100%, 0% 98%);
+        }
+        
+        /* Flour Particles CSS */
+        .flour-particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            filter: blur(1px);
+            pointer-events: none;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        @keyframes flour-fall {
+            0% {
+                transform: translateY(-20px) translateX(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(110vh) translateX(var(--drift)) rotate(var(--rot));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex items-center justify-center noise-bg antialiased relative overflow-hidden">
+<!-- Cinematic background image -->
+<div class="fixed inset-0 z-0 overflow-hidden">
+<img class="w-full h-full object-cover opacity-60 mix-blend-multiply will-change-transform" data-alt="Cinematic, high-contrast photo of a chef's workbench with wooden textures, scattered flour, and a vintage rolling pin bathed in warm, directional morning light." id="bg-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6PdPN0ZlL_YlCOCVrwlXWHCfCHggbwRnZwHk4FLfQ1lVLc0laS2uKZ9X4BcDSCLftVTImljFEaDLCZW2ESWFS0WOJzyyQR0hGkNHNlFbIkJHpAWeYabL9yXkjG0xqFUpVrgz4WqFYYrQfk7PnE-YTQZRzBsLDwNQ1S7bjeeJhMBOHepH3dat6kDv4gCJ4F-0BPtLM7denuoBHB-gf9fYAmaU8xOtmKxTp9DarkUQ6xT8xD2ZJ7M3WvcWXeEh3RiBfTOZjslZzf7ym" style="transform: translate(var(--bg-x, 0px), var(--bg-y, 0px)) rotate(var(--bg-rot, 0deg)) scale(1.1); transform-origin: center center; --bg-x: 0px; --bg-y: 0px; --bg-rot: 0deg;">
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-surface/20 mix-blend-overlay"></div>
+<div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+</div>
+<!-- Flour Particles Layer -->
+<div class="fixed inset-0 z-[5] pointer-events-none overflow-hidden" id="particle-container"></div>
+<!-- Login Card: The Journal Cover -->
+<main class="w-full max-w-lg mx-margin-mobile md:mx-auto relative z-10 pb-8">
+<div class="bg-surface-bright paper-texture torn-edge shadow-[0_15px_40px_-5px_rgba(29,46,0,0.4)] overflow-hidden border-t-2 border-l border-r border-outline-variant/30 glow-effect transform transition-all hover:scale-[1.01] duration-700 ease-out relative">
+<!-- Decorative Herb Sketch -->
+<div class="absolute top-8 right-8 opacity-20 pointer-events-none rotate-12">
+<svg class="text-tertiary" fill="none" height="60" stroke="currentColor" viewBox="0 0 40 60" width="40">
+<path d="M20 60 C20 40, 10 30, 10 20 C10 10, 20 0, 20 0" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M20 45 C25 40, 30 35, 28 25 C26 15, 20 20, 20 20" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M15 35 C5 30, 2 20, 8 15 C14 10, 20 18, 20 18" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="px-8 py-16 md:p-16 flex flex-col items-center text-center">
+<!-- Brand Anchor -->
+<h1 class="text-primary font-headline-lg text-headline-lg-mobile md:text-headline-lg italic mb-6 cursor-pointer select-none transition-transform active:scale-95 z-20 relative" id="cookcraft-title" title="Sprinkle some flour">CookCraft</h1>
+<!-- Handwritten Note -->
+<div class="mb-12 relative w-full flex justify-center">
+<div class="max-w-[90%] rotate-[-3deg] transform hover:rotate-0 transition-transform duration-500">
+<p class="font-handwritten text-3xl text-on-secondary-fixed-variant leading-relaxed">
+                            "Welcome back to the kitchen, Chef."
+                        </p>
+</div>
+</div>
+<!-- Action Area -->
+<div class="w-full space-y-8 flex flex-col items-center mt-4">
+<button class="w-full sm:w-4/5 flex items-center justify-center gap-3 bg-primary-container text-on-primary py-4 px-6 rounded shadow-sm border border-primary-fixed/20 hover:bg-primary transition-colors duration-300" onclick="window.location.href='{{DATA:SCREEN:SCREEN_4}}'">
+<span class="material-symbols-outlined text-[20px]" data-icon="login" style="font-variation-settings: 'FILL' 0;">login</span>
+<span class="font-body-md text-body-md font-medium tracking-wide" onclick="window.location.href='home.html'">Sign in with Google</span>
+</button>
+<div class="flex items-center gap-4 w-full sm:w-4/5">
+<div class="h-px bg-outline-variant flex-1"></div>
+<span class="text-on-surface-variant font-label-caps text-label-caps opacity-60">OR</span>
+<div class="h-px bg-outline-variant flex-1"></div>
+</div>
+<form class="w-full sm:w-4/5 space-y-6">
+<div class="relative">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant text-on-surface font-body-md text-body-md focus:ring-0 focus:border-secondary transition-colors px-0 py-2 placeholder:text-on-surface-variant/50 placeholder:font-serif italic" placeholder="Enter your email address..." type="email">
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-surface-container-low text-secondary py-3 px-6 rounded border border-secondary/20 hover:bg-secondary hover:text-on-secondary hover:shadow-md transition-all duration-300" type="button" onclick="window.location.href='home.html'">
+<span class="font-body-md text-body-md font-medium" >Continue with Email</span>
+</button>
+</form>
+</div>
+<!-- Footer Links -->
+<div class="mt-16 w-full flex justify-center gap-8 relative">
+<div class="absolute -top-6 left-1/4 right-1/4 h-px bg-outline-variant/30"></div>
+<div class="flex flex-col items-center space-y-2">
+<a class="font-label-caps text-[10px] text-on-surface-variant/70 hover:text-secondary transition-colors" href="#">1. The Story</a>
+<a class="font-label-caps text-[10px] text-on-surface-variant/70 hover:text-secondary transition-colors" href="#">2. Terms of Art</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Subtle atmospheric JS effect -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bgImage = document.getElementById('bg-image');
+            let targetX = 0;
+            let targetY = 0;
+            let currentX = 0;
+            let currentY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                
+                // Calculate normalized mouse position (-1 to 1)
+                const mouseX = (e.clientX / windowWidth) * 2 - 1;
+                const mouseY = (e.clientY / windowHeight) * 2 - 1;
+                
+                // Set target displacement for background (heavy feel)
+                targetX = mouseX * -25; 
+                targetY = mouseY * -15;
+                
+                // Keep the card hover effect
+                const card = document.querySelector('.glow-effect');
+                if(card) {
+                    const x = (e.clientX / windowWidth - 0.5) * 5;
+                    const y = (e.clientY / windowHeight - 0.5) * 5;
+                    card.style.transform = `perspective(1000px) rotateX(${-y}deg) rotateY(${x}deg) scale3d(1.01, 1.01, 1.01)`;
+                }
+            });
+
+            function animate() {
+                // Easing for the heavy background interaction
+                currentX += (targetX - currentX) * 0.03;
+                currentY += (targetY - currentY) * 0.03;
+                
+                // Simulate rotation based on X movement
+                const rot = currentX * 0.15;
+
+                if (bgImage) {
+                    bgImage.style.setProperty('--bg-x', `${currentX}px`);
+                    bgImage.style.setProperty('--bg-y', `${currentY}px`);
+                    bgImage.style.setProperty('--bg-rot', `${rot}deg`);
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            // Flour Particles Logic
+            const title = document.getElementById('cookcraft-title');
+            const particleContainer = document.getElementById('particle-container');
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            
+            if (title && particleContainer) {
+                title.addEventListener('click', () => {
+                    if (prefersReducedMotion.matches) return;
+                    
+                    const particleCount = 40;
+                    for (let i = 0; i < particleCount; i++) {
+                        createFlourParticle();
+                    }
+                });
+            }
+            
+            function createFlourParticle() {
+                const p = document.createElement('div');
+                p.classList.add('flour-particle');
+                
+                // Randomize properties for natural look
+                const size = Math.random() * 5 + 2; // 2px to 7px
+                const startX = Math.random() * 100; // 0vw to 100vw
+                const duration = Math.random() * 3 + 2; // 2s to 5s
+                const drift = (Math.random() - 0.5) * 150; // -75px to 75px
+                const rot = (Math.random() - 0.5) * 360; // -180deg to 180deg
+                const delay = Math.random() * 0.4;
+                
+                p.style.width = `${size}px`;
+                p.style.height = `${size}px`;
+                p.style.left = `${startX}vw`;
+                p.style.top = `-20px`;
+                p.style.setProperty('--drift', `${drift}px`);
+                p.style.setProperty('--rot', `${rot}deg`);
+                p.style.animation = `flour-fall ${duration}s ease-in ${delay}s forwards`;
+                
+                particleContainer.appendChild(p);
+                
+                // Cleanup after animation completes
+                setTimeout(() => {
+                    if (p.parentNode) p.remove();
+                }, (duration + delay) * 1000);
+            }
+        });
+    </script>
+
+
+</body></html>
