@@ -11,7 +11,42 @@ type SearchResult = {
 	calories?: number | null;
 	difficulty: string;
 	cuisine?: string | null;
+	imageUrl?: string | null;
+	description?: string;
 };
+
+// Helper to normalize and check if user ingredient matches recipe ingredient
+function matchesIngredient(userIng: string, recipeIng: string): boolean {
+  const u = userIng.toLowerCase().trim();
+  const r = recipeIng.toLowerCase().trim();
+  
+  if (u === r) return true;
+  
+  // Helper to strip plural 's' or 'es'
+  const singularize = (str: string) => {
+    if (str.endsWith("es")) {
+      if (str.endsWith("toes")) return str.slice(0, -2); // tomatoes -> tomato
+      if (str.endsWith("ies")) return str.slice(0, -3) + "y"; // chillies -> chilly
+      return str.slice(0, -1);
+    }
+    if (str.endsWith("s") && !str.endsWith("ss")) {
+      return str.slice(0, -1);
+    }
+    return str;
+  };
+  
+  const uSing = singularize(u);
+  const rSing = singularize(r);
+  
+  if (uSing === rSing) return true;
+  
+  // Check if one contains the other as a whole word or substring
+  if (r.includes(u) || u.includes(r) || rSing.includes(uSing) || uSing.includes(rSing)) {
+    return true;
+  }
+  
+  return false;
+}
 
 export class SearchService {
 	/**
@@ -19,12 +54,6 @@ export class SearchService {
 	 * Returns results sorted by highest match percentage and excludes 0-match recipes.
 	 */
 	async searchRecipes(userIngredients: string[]): Promise<SearchResult[]> {
-		const normalizedUserIngredients = new Set(
-			userIngredients
-				.filter(Boolean)
-				.map((i) => i.trim().toLowerCase())
-		);
-
 		const recipes = await prisma.recipe.findMany({
 			include: {
 				ingredients: {
@@ -46,23 +75,23 @@ export class SearchService {
 				)
 			);
 
-			const recipeIngredientNamesNorm = recipeIngredientNames.map((n) =>
-				n.toLowerCase()
-			);
-
-			const total = recipeIngredientNamesNorm.length;
+			const total = recipeIngredientNames.length;
 			if (total === 0) continue;
 
 			let matched = 0;
 			const missing: string[] = [];
 
-			for (let idx = 0; idx < recipeIngredientNamesNorm.length; idx++) {
-				const nameNorm = recipeIngredientNamesNorm[idx];
-				if (normalizedUserIngredients.has(nameNorm)) {
+			for (let idx = 0; idx < recipeIngredientNames.length; idx++) {
+				const recipeIngName = recipeIngredientNames[idx];
+				// Check if any user ingredient matches this recipe ingredient
+				const isMatched = userIngredients.some((userIng) => 
+					matchesIngredient(userIng, recipeIngName)
+				);
+
+				if (isMatched) {
 					matched += 1;
 				} else {
-					// push original-cased name
-					missing.push(recipeIngredientNames[idx]);
+					missing.push(recipeIngName);
 				}
 			}
 
@@ -79,6 +108,8 @@ export class SearchService {
 				calories: r.calories ?? null,
 				difficulty: String(r.difficulty),
 				cuisine: r.cuisine ?? null,
+				imageUrl: r.imageUrl,
+				description: r.description,
 			});
 		}
 
@@ -94,3 +125,4 @@ export class SearchService {
 		return results;
 	}
 }
+

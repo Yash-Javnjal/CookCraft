@@ -1,6 +1,7 @@
 // src/app.ts
 
 import express, { Application, Request, Response, NextFunction } from "express";
+import cors from "cors";
 import recipeRoutes from "./routes/recipe.route";
 import searchRoutes from "./routes/search.route";
 
@@ -8,6 +9,7 @@ const app: Application = express();
 
 // ─── Global Middleware ────────────────────────────────────
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
