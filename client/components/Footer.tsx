@@ -24,7 +24,7 @@ export default function Footer() {
               Terms of Service
             </Link>
             <Link href="/journal" className="text-on-surface-variant hover:text-primary transition-all hover:underline font-body-md font-bold text-left">
-              Journal Archive
+              Journal 
             </Link>
           </div>
         </div>
@@ -33,7 +33,7 @@ export default function Footer() {
             <span className="material-symbols-outlined text-[18px]">share</span>
           </div>
           <div className="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary cursor-pointer hover:bg-primary hover:text-on-primary transition-all">
-            <span className="material-symbols-outlined text-[18px]">mail</span>
+            <span className="material-symbols-outlined text-[18px]">Mail</span>
           </div>
         </div>
       </div>
