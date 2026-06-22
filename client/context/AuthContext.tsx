@@ -13,6 +13,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   favorites: string[];
+  isInitialized: boolean;
   login: (email: string, name?: string) => Promise<void>;
   register: (email: string, name: string) => Promise<void>;
   logout: () => void;
@@ -22,8 +23,10 @@ interface AuthContextType {
   sendPasswordReset: (email: string) => Promise<{ error: any | null }>;
 }
 
-function mapSupabaseUserToUser(supabaseUser: { email?: string | null; user_metadata?: any }): User {
+function mapSupabaseUserToUser(supabaseUser: { id?: string; email?: string | null; created_at?: string; user_metadata?: any }): User {
   const email = supabaseUser.email ?? "";
+  const id = supabaseUser.id;
+  const createdAt = supabaseUser.created_at;
   const metadataName = typeof supabaseUser.user_metadata?.full_name === "string"
     ? supabaseUser.user_metadata.full_name
     : undefined;
@@ -38,7 +41,7 @@ function mapSupabaseUserToUser(supabaseUser: { email?: string | null; user_metad
           .join(" ")
       : "Chef";
 
-  return { email, name };
+  return { id, email, name, createdAt };
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -49,10 +52,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Helper to sync user with backend DB and load their favorites
-  const syncUserWithBackend = async (email: string, name: string): Promise<User | null> => {
+  const syncUserWithBackend = async (email: string, name: string, authId?: string, createdAt?: string): Promise<User | null> => {
     try {
       const { api } = await import("../lib/api");
-      const res = await api.post<{ success: boolean; data: any }>("/users/sync", { email, name });
+      const res = await api.post<{ success: boolean; data: any }>("/users/sync", { id: authId, email, name, createdAt });
       if (res.data.success && res.data.data) {
         const dbUser = res.data.data;
         const mappedUser: User = {
@@ -106,7 +109,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const session = data?.session;
       if (mounted && session?.user) {
         const u = mapSupabaseUserToUser(session.user);
-        await syncUserWithBackend(u.email, u.name);
+        await syncUserWithBackend(u.email, u.name, u.id, u.createdAt);
       }
 
       // fallback load of favorites from local storage if not synced yet
@@ -126,7 +129,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (!mounted) return;
         if (session?.user) {
           const u = mapSupabaseUserToUser(session.user);
-          await syncUserWithBackend(u.email, u.name);
+          await syncUserWithBackend(u.email, u.name, u.id, u.createdAt);
         } else {
           setUser(null);
           setFavorites([]);
@@ -239,6 +242,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         favorites,
+        isInitialized,
         login,
         register,
         logout,

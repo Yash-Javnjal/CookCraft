@@ -13,45 +13,38 @@ const CUISINE_METADATA: Record<
 > = {
   italian: {
     imageUrl:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBbE5mvbCWy2SaXC_SBvBVdVYaGfZJ6T4gMMaK3Ln3t5LAedG_bP_eiHT1gShZOH0uORG7i25iYPj8oyLL5qIBVQPx8Kuazt_gju5SZxNCPCzJREWtSjXKgGsJFfOXqQPCyv6IFwaG0E7_V4178e56rAUNCDBFgEtypryssKFx7GPz98ldw_juQqFO4yfnT5R-PwYwxf1dH60Fp1vbpXEgavCFUAcZcbjpVvBWki3IkxFVrV-QcZIEty6zBJvxNqUcuSs6P23XTWNi7",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyuTTTfxTx6Ww1ZyWxvyT7dbyWz4nc-QQfcA&s",
     icon: "water",
     heritage: "Coastal Heritage",
     desc: "The poetry of simplicity. Where a handful of pristine ingredients—flour, water, olive oil, and tomatoes—transform into profound comfort.",
   },
-  nordic: {
-    imageUrl:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBP1nBALI5IMecsK57YHqX7ll4dPxf_bjQO4ZVbme4sGXdkHQ1bwFFzzPP8xcfVc5IGgIyl5a5b-1q_EoFOThp060nQ3yeNKJ58VzeK8PzfSluowrkPH14KB4TvTEUZ0Ec8sLDmR17_B7I82ujhNDdySr04TsbHHLWov0QJH8Y6EnlLlh7qD7j4mdbdpCcxpJaPPiGNy_cGmQqE6uAxOKoyZ2Aa0oebdCDolUooFtXdDfa69MW1ODT6Sd35-tKbwjxEElkvuKEj-xwU",
-    icon: "11mp",
-    heritage: "Foraged & Preserved",
-    desc: "Born from necessity and cold winters. A study in stark contrasts: the sharp bite of pickling against the rich umami of smoked meats.",
-  },
-  "east asian": {
-    imageUrl:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCoNKZm2rveINK0g6VDMXTZhPfqoaz7DrgMib5QjO7LSdCgoSY-rVlG7HWlfLNEuF17GcW7iNs60lXdlVd4i8iYhftqeS1jfrLv8Ch_a3d3bGEI_J8WcRQ-NNjX3C6ZrJu6kSl8jOgInvi7nuL9_OzAOdlQ_pXc2ZdJzUSTGpZGEJA0jIrXjMN0LaFDF5H_Vcv-v9nrGXdisH1Hd1LOmez4fP0IATOyWdU1sBxKYwU5dL64l33ml-GKMJeEK7_GzgF2JrnVo64WFrA1",
-    icon: "local_fire_department",
-    heritage: "Wok & Steam",
-    desc: "The mastery of balance. Where fire meets water, and the precise geometry of folding dough yields comfort in every bite.",
-  },
-  japanese: {
-    imageUrl:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDgp5GuWBbae7fW807n-BRYR3-Zi0swdeTtgLyU-9FU6G_TSGXucXnjs2pc4KZ3HMZLANFzwDIeDNLItoT_p_1gJUme52qg-VfuSJ1oHIz4HgO5UE1EvMjBo016xvf6JCaS5ji4Fo0pL0OyJ3zZ_Rlmdb8GoFhSHnX8gA_8-eykewKIRLOTp4LvcbMjKENKMRYcqj-B3Rv07q-RIEiilxFv07UTj_asHs-xcLNUb3GuP8S2UvzAFHg0cyk_k96wbMJ_TQV4Icnx8WBA",
-    icon: "spa",
-    heritage: "Zen Restraint",
-    desc: "A masterclass in restraint and reverence for seasonal perfection.",
-  },
-  "latin american": {
-    imageUrl:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCEybDI-QjLw2dkvOO0cL9IYaZC4JctwbRQEzl0goyZ5IxpZ_cVbkvIpQgPAsFEh2jJmrRLEQmvRQm1pKGju5WM-PdY4xla7-89Kbbwi3M81HrFXhNihI0R0brh6cLQeeqvjOP78CMv4paLcpF39kIHOXTRSa47bYAdCSAIqN9pORACje-XQD9m3P1hhiQAxgJTM49LIIoB9tgWTkth8mcsGWZZenXeJBfuEIHRIjtBmg7SQ4UUcLHZBlRdagNllG2GRSZLSxohinSx",
-    icon: "agriculture",
-    heritage: "Maize & Spice",
-    desc: "A vibrant tapestry of indigenous roots and colonial influences. Built upon the foundational trio of corn, beans, and native chilies.",
-  },
   mexican: {
     imageUrl:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuByRBqK0mUcBAXn0wnoUFPya5xnLceaIgASedfywc7wPMaIwg719eDM0BG2a4Ji4b3xzBjxkyDPn_soZfxQ--Mq7xA41RPFbjxYvM0pqi28T3Rj-8UQFeCRoF7BOQjsL-6MbM9QzCtc_oue8Y9XKwAh4Yun-T8F9ochJX8t5xDaVilMjB5Rl-fyJoGsxkxtPFJrYy3mdwagv4pTnrAJq-v_DRNSLmjEd1zV-eAifCDRdb_G3jdijizSF_X_ZRQrLxK9VY2FQOwWmSX8",
+      "https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/hmlujvrb/fd6813c5-b6d8-4283-8bba-7786894144e7.jpg",
     icon: "local_dining",
     heritage: "Fireside Fiesta",
     desc: "Vibrant, fiery, and deeply rooted in indigenous earthiness. The magic of masa, chillies, and slow-roasted meats.",
+  },
+  indian: {
+    imageUrl:
+      "https://images.stockcake.com/public/0/2/f/02f1ddcd-7014-4479-89de-6a6387442ab2_large/indian-feast-spread-stockcake.jpg",
+    icon: "spa",
+    heritage: "Spice & Soul",
+    desc: "A civilization's worth of flavor layered into every dish. From the char of a tandoor to the slow bloom of a curry, Indian cooking is an ancient alchemy of spice, heat, and heart.",
+  },
+  american: {
+    imageUrl:
+      "https://cu-website-cms-prd.s3.us-east-1.amazonaws.com/american_cuisine_header_2b8ea6aebb.jpg",
+    icon: "local_fire_department",
+    heritage: "Melting Pot",
+    desc: "Bold, generous, and unapologetically diverse. A cuisine shaped by immigrants and open roads — from the smoky low-and-slow of the South to the diner counter classics that defined a century.",
+  },
+  chinese: {
+    imageUrl:
+      "https://cdn.britannica.com/12/196512-050-76584C2F/dishes-Chinese.jpg",
+    icon: "restaurant",
+    heritage: "Wok & Dynasty",
+    desc: "Five thousand years of culinary mastery distilled into smoke, steam, and precision. Where the wok's sear, the dumpling's fold, and the broth's depth tell stories older than any cookbook.",
   },
 };
 
@@ -110,9 +103,6 @@ export default function Cuisines() {
     <main className="flex-grow pb-32 md:pb-section-gap text-left">
       {/* Hero Section */}
       <section className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24 flex flex-col items-center text-center">
-        <span className="text-label-caps font-label-caps text-secondary uppercase tracking-widest mb-4">
-          Volume IV · Global Pairings
-        </span>
         <h1 className="text-headline-xl font-headline-xl text-primary mb-6">CookCraft Atlas</h1>
         <p className="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">
           A curated culinary journal exploring the world's most evocative flavor profiles. Turn the page to discover regional traditions, signature ingredients, and timeless recipes born from the hearth.
@@ -133,7 +123,7 @@ export default function Cuisines() {
               const normalized = cuisineName.toLowerCase();
               const meta = CUISINE_METADATA[normalized] || {
                 imageUrl:
-                  "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&auto=format&fit=crop",
+                  "https://images.stockcake.com/public/0/2/f/02f1ddcd-7014-4479-89de-6a6387442ab2_large/indian-feast-spread-stockcake.jpg",
                 icon: "restaurant",
                 heritage: "Global Taste",
                 desc: `Discover dynamic, authentic recipe creations from the ${cuisineName} tradition.`,

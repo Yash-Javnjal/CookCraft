@@ -1,4 +1,4 @@
-import { DietType, Difficulty } from "@prisma/client";
+import { DietType, Difficulty, RecipeType } from "@prisma/client";
 import { prisma } from "./prisma";
 
 type SeedIngredient = {
@@ -16,6 +16,7 @@ type SeedRecipe = {
   description: string;
   cuisine: string;
   dietType: DietType;
+  recipeType: RecipeType;
   difficulty: Difficulty;
   cookTime: number;
   calories: number;
@@ -30,9 +31,11 @@ const recipes = [
     description: "A rich and creamy north Indian curry with soft paneer cubes simmered in a velvety butter and tomato gravy, spiced with aromatic masalas.",
     cuisine: "Indian",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "MEDIUM",
     cookTime: 35,
     calories: 420,
+    imageUrl: "https://www.ruchiskitchen.com/wp-content/uploads/2020/12/Paneer-butter-masala-recipe-3.jpg.webp",
     ingredients: [
       { name: "Paneer", quantity: "250g, cubed" },
       { name: "Tomato", quantity: "3 medium, chopped" },
@@ -58,9 +61,11 @@ const recipes = [
     description: "Juicy marinated chicken pieces grilled to perfection and tossed in a bold, smoky tomato-onion gravy with warming Indian spices.",
     cuisine: "Indian",
     dietType: "HIGH_PROTEIN",
+    recipeType: "NON_VEG",
     difficulty: "MEDIUM",
     cookTime: 50,
     calories: 480,
+    imageUrl: "https://i.pinimg.com/1200x/2a/86/40/2a864028c6cf41e9d037bdf6e74e07be.jpg",
     ingredients: [
       { name: "Chicken", quantity: "500g, boneless cubes" },
       { name: "Onion", quantity: "2 medium, finely chopped" },
@@ -87,9 +92,11 @@ const recipes = [
     description: "A comforting everyday Indian lentil dish finished with a sizzling temper of cumin, garlic, and dried chilies — humble, hearty, and deeply flavorful.",
     cuisine: "Indian",
     dietType: "VEGAN",
+    recipeType: "VEG",
     difficulty: "EASY",
     cookTime: 25,
     calories: 280,
+    imageUrl: "https://i.pinimg.com/1200x/3e/f4/73/3ef473f8e09ef12ab94749b2e2f3a7bd.jpg",
     ingredients: [
       { name: "Yellow lentils", quantity: "1 cup" },
       { name: "Onion", quantity: "1 medium, finely chopped" },
@@ -114,9 +121,11 @@ const recipes = [
     description: "A classic dry stir-fry of potato and cauliflower cooked with turmeric, cumin, and ginger — a staple from Indian home kitchens.",
     cuisine: "Indian",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "EASY",
     cookTime: 30,
     calories: 220,
+    imageUrl: "https://i.pinimg.com/736x/80/76/54/807654da793fa73fe787433d4a5ce1fb.jpg",
     ingredients: [
       { name: "Potato", quantity: "3 medium, diced" },
       { name: "Cauliflower", quantity: "1 small head, cut into florets" },
@@ -141,9 +150,11 @@ const recipes = [
     description: "Succulent tandoor-style chicken in a silky, mildly spiced tomato and butter sauce — India's most beloved dish worldwide.",
     cuisine: "Indian",
     dietType: "HIGH_PROTEIN",
+    recipeType: "NON_VEG",
     difficulty: "MEDIUM",
     cookTime: 45,
     calories: 510,
+    imageUrl: "https://i.pinimg.com/736x/22/26/0a/22260acab33ad32c1073fb10f751a4e3.jpg",
     ingredients: [
       { name: "Chicken", quantity: "500g, boneless" },
       { name: "Butter", quantity: "4 tbsp" },
@@ -169,9 +180,11 @@ const recipes = [
     description: "A vibrant Indian curry made with fresh spinach puree and golden-fried paneer, spiced with garlic, ginger, and warming garam masala.",
     cuisine: "Indian",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "MEDIUM",
     cookTime: 35,
     calories: 380,
+    imageUrl: "https://i.pinimg.com/1200x/13/00/a0/1300a0ac4d8a533bf05bfa148cad85be.jpg",
     ingredients: [
       { name: "Paneer", quantity: "200g, cubed" },
       { name: "Spinach", quantity: "300g, fresh leaves" },
@@ -197,9 +210,11 @@ const recipes = [
     description: "A timeless Neapolitan pizza topped with bright tomato sauce, fresh mozzarella, and fragrant basil on a hand-stretched crispy crust.",
     cuisine: "Italian",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "MEDIUM",
     cookTime: 40,
     calories: 560,
+    imageUrl: "https://i.pinimg.com/vwebp/736x/0a/34/c1/0a34c17ac88f93878b0d3253ffd39e1f.webp",
     ingredients: [
       { name: "Flour", quantity: "2 cups, all-purpose" },
       { name: "Tomato", quantity: "2 medium, crushed" },
@@ -223,9 +238,11 @@ const recipes = [
     description: "A deceptively simple yet deeply satisfying Italian pasta made with spaghetti, slowly golden garlic, good olive oil, and a hint of chili.",
     cuisine: "Italian",
     dietType: "VEGAN",
+    recipeType: "VEG",
     difficulty: "EASY",
     cookTime: 20,
     calories: 390,
+    imageUrl: "https://i.pinimg.com/1200x/65/85/fb/6585fb0c9e9af3fd7ff5734f8cee8692.jpg",
     ingredients: [
       { name: "Spaghetti", quantity: "200g" },
       { name: "Garlic", quantity: "6 cloves, thinly sliced" },
@@ -246,9 +263,11 @@ const recipes = [
     description: "Creamy, indulgent fettuccine coated in a rich butter and parmesan sauce, topped with seasoned pan-seared chicken strips.",
     cuisine: "Italian",
     dietType: "HIGH_PROTEIN",
+    recipeType: "NON_VEG",
     difficulty: "MEDIUM",
     cookTime: 30,
     calories: 620,
+    imageUrl: "https://i.pinimg.com/736x/73/1b/15/731b156759585df8fd9569e6fb83fdd8.jpg",
     ingredients: [
       { name: "Fettuccine", quantity: "200g" },
       { name: "Chicken", quantity: "300g, sliced into strips" },
@@ -272,9 +291,11 @@ const recipes = [
     description: "Layers of seasoned ground beef bolognese, creamy béchamel sauce, and tender pasta sheets baked until golden and bubbling.",
     cuisine: "Italian",
     dietType: "NONE",
+    recipeType: "NON_VEG",
     difficulty: "HARD",
     cookTime: 90,
     calories: 680,
+    imageUrl: "https://i.pinimg.com/736x/81/43/53/81435390854b9c8d4ee93263e6af2413.jpg",
     ingredients: [
       { name: "Lasagna sheets", quantity: "12 sheets" },
       { name: "Ground beef", quantity: "400g" },
@@ -301,9 +322,11 @@ const recipes = [
     description: "Wok-tossed day-old rice with tender chicken, scrambled eggs, and savory soy sauce — a Chinese takeout staple made at home.",
     cuisine: "Chinese",
     dietType: "HIGH_PROTEIN",
+    recipeType: "NON_VEG",
     difficulty: "EASY",
     cookTime: 25,
     calories: 450,
+    imageUrl: "https://i.pinimg.com/736x/f5/12/11/f512117739494fb07f15f90d38d2cc1b.jpg",
     ingredients: [
       { name: "Rice", quantity: "2 cups, cooked and cold" },
       { name: "Chicken", quantity: "250g, diced" },
@@ -327,9 +350,11 @@ const recipes = [
     description: "Indo-Chinese street-style noodles tossed in a blazing wok with crisp vegetables, soy sauce, and chili sauce.",
     cuisine: "Chinese",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "EASY",
     cookTime: 20,
     calories: 340,
+    imageUrl: "https://i.pinimg.com/1200x/02/1e/71/021e718537ad56f35e8df28bc374893f.jpg",
     ingredients: [
       { name: "Hakka noodles", quantity: "200g" },
       { name: "Onion", quantity: "1 medium, thinly sliced" },
@@ -352,9 +377,11 @@ const recipes = [
     description: "A classic Sichuan stir-fry with tender chicken, crunchy peanuts, dried chilies, and a bold sweet-spicy-tangy sauce.",
     cuisine: "Chinese",
     dietType: "HIGH_PROTEIN",
+    recipeType: "NON_VEG",
     difficulty: "MEDIUM",
     cookTime: 30,
     calories: 420,
+    imageUrl: "https://i.pinimg.com/1200x/de/9a/1c/de9a1c1d6597d31574a257a813db822a.jpg",
     ingredients: [
       { name: "Chicken", quantity: "400g, cubed" },
       { name: "Onion", quantity: "1 medium, diced" },
@@ -367,7 +394,7 @@ const recipes = [
     steps: [
       { stepNumber: 1, instruction: "Marinate chicken in 1 tbsp soy sauce and a pinch of cornstarch for 15 minutes." },
       { stepNumber: 2, instruction: "Mix the sauce: combine remaining soy sauce, 1 tbsp vinegar, 1 tsp sugar, and 1 tbsp water. Set aside." },
-      { stepNumber: 3, instruction: "Heat oil in a wok over high heat. Fry dried chilies for 30 seconds until they darken slightly." },
+      { stepNumber: 3, instruction: "Heat oil in a wok over high heat. Try dried chilies for 30 seconds until they darken slightly." },
       { stepNumber: 4, instruction: "Add marinated chicken and stir-fry until cooked through and golden, about 5 minutes." },
       { stepNumber: 5, instruction: "Add onion and garlic. Stir-fry for 2 more minutes." },
       { stepNumber: 6, instruction: "Pour in the sauce and toss everything together. Cook for 1 minute until sauce coats the chicken." },
@@ -379,9 +406,11 @@ const recipes = [
     description: "Fluffy wok-tossed rice scrambled with eggs, scallions, and soy sauce — a quick Chinese staple made in under 20 minutes.",
     cuisine: "Chinese",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "EASY",
     cookTime: 20,
     calories: 380,
+    imageUrl: "https://i.pinimg.com/vwebp/1200x/8d/87/05/8d8705cb822ece67523cec23fe3ab454.webp",
     ingredients: [
       { name: "Rice", quantity: "2 cups, cooked and cold" },
       { name: "Eggs", quantity: "3 large" },
@@ -404,9 +433,11 @@ const recipes = [
     description: "A perfectly folded fluffy egg omelette with a gooey melted cheddar center — a quick, satisfying American breakfast classic.",
     cuisine: "American",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "EASY",
     cookTime: 10,
     calories: 310,
+    imageUrl: "https://i.pinimg.com/736x/1d/fd/f9/1dfdf974a298afa77d3a29ad3c969c05.jpg",
     ingredients: [
       { name: "Eggs", quantity: "3 large" },
       { name: "Cheese", quantity: "50g cheddar, grated" },
@@ -428,9 +459,11 @@ const recipes = [
     description: "A juicy smash-style beef patty with melted cheddar, sliced tomato, and caramelized onion stacked in a toasted brioche bun.",
     cuisine: "American",
     dietType: "HIGH_PROTEIN",
+    recipeType: "NON_VEG",
     difficulty: "MEDIUM",
     cookTime: 25,
     calories: 620,
+    imageUrl: "https://i.pinimg.com/736x/ef/d1/ab/efd1ab4b55f460cd93a174e139a0da96.jpg",
     ingredients: [
       { name: "Ground beef", quantity: "300g" },
       { name: "Burger buns", quantity: "2" },
@@ -454,9 +487,11 @@ const recipes = [
     description: "Tall, fluffy American-style pancakes with golden edges and a tender crumb, served with maple syrup and a pat of melting butter.",
     cuisine: "American",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "EASY",
     cookTime: 20,
     calories: 350,
+    imageUrl: "https://i.pinimg.com/736x/ef/94/9d/ef949d8aa79b4c5268f11dce8b9b7858.jpg",
     ingredients: [
       { name: "Flour", quantity: "1.5 cups, all-purpose" },
       { name: "Milk", quantity: "1 cup" },
@@ -478,9 +513,11 @@ const recipes = [
     description: "Ultra-creamy baked macaroni in a velvety cheddar sauce with a golden bubbling top — American comfort food at its finest.",
     cuisine: "American",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "MEDIUM",
     cookTime: 30,
     calories: 580,
+    imageUrl: "https://i.pinimg.com/1200x/1c/e3/99/1ce399e3ef11610cd13a855ffa5b7767.jpg",
     ingredients: [
       { name: "Macaroni", quantity: "2 cups" },
       { name: "Cheese", quantity: "200g cheddar, grated" },
@@ -503,9 +540,11 @@ const recipes = [
     description: "Juicy spiced chicken strips in warm corn tortillas with fresh tomato salsa, shredded cheese, and a squeeze of lime.",
     cuisine: "Mexican",
     dietType: "HIGH_PROTEIN",
+    recipeType: "NON_VEG",
     difficulty: "EASY",
     cookTime: 25,
     calories: 390,
+    imageUrl: "https://i.pinimg.com/736x/53/03/44/5303447fba3db394a474070c107d3ac6.jpg",
     ingredients: [
       { name: "Chicken", quantity: "350g, cut into strips" },
       { name: "Corn tortillas", quantity: "6 small" },
@@ -529,9 +568,11 @@ const recipes = [
     description: "Crispy golden flour tortillas filled with creamy refried beans, melted cheddar, and caramelized onion — a quick Mexican weeknight meal.",
     cuisine: "Mexican",
     dietType: "VEGETARIAN",
+    recipeType: "VEG",
     difficulty: "EASY",
     cookTime: 15,
     calories: 430,
+    imageUrl: "https://i.pinimg.com/1200x/2b/f6/e4/2bf6e46d9e7503c065274d5a2ca6bb78.jpg",
     ingredients: [
       { name: "Flour tortillas", quantity: "4 large" },
       { name: "Cheese", quantity: "150g cheddar, grated" },
@@ -567,6 +608,7 @@ function getRecipeData(recipe: SeedRecipe, userId: string) {
     description: recipe.description,
     cuisine: recipe.cuisine,
     dietType: recipe.dietType,
+    recipeType: recipe.recipeType,
     difficulty: recipe.difficulty,
     cookTime: recipe.cookTime,
     calories: recipe.calories,
@@ -582,6 +624,7 @@ async function main() {
     where: { email: "chef@cookcraft.com" },
     update: {},
     create: {
+      id: "system-chef-id",
       email: "chef@cookcraft.com",
       name: "System Chef",
     },

@@ -172,7 +172,7 @@ export default function Navbar() {
                           <span>My Culinary Archive</span>
                         </Link>
                         <Link
-                          href="/discover"
+                          href="/profile#saved-recipes"
                           onClick={() => setProfileOpen(false)}
                           className="w-full py-2 hover:bg-surface-container rounded text-left px-3 text-sm font-body-md text-primary flex items-center gap-2 transition-colors"
                         >

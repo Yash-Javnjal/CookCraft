@@ -49,6 +49,7 @@ export default function ProfilePage() {
   const [formDescription, setFormDescription] = useState("");
   const [formCuisine, setFormCuisine] = useState("");
   const [formDifficulty, setFormDifficulty] = useState<"EASY" | "MEDIUM" | "HARD">("MEDIUM");
+  const [formRecipeType, setFormRecipeType] = useState<"VEG" | "NON_VEG">("VEG");
   const [formCookTime, setFormCookTime] = useState(30);
   const [formCalories, setFormCalories] = useState<number | "">("");
   const [formImageUrl, setFormImageUrl] = useState("");
@@ -60,6 +61,8 @@ export default function ProfilePage() {
   ]);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
   const [isSaving, setIsSaving] = useState(false);
+  const [showAllCreated, setShowAllCreated] = useState(false);
+  const [showAllFavorited, setShowAllFavorited] = useState(false);
 
   // Fetch profile data
   const fetchProfile = async () => {
@@ -105,6 +108,7 @@ export default function ProfilePage() {
     setFormDescription("");
     setFormCuisine("");
     setFormDifficulty("MEDIUM");
+    setFormRecipeType("VEG");
     setFormCookTime(30);
     setFormCalories("");
     setFormImageUrl("");
@@ -121,6 +125,7 @@ export default function ProfilePage() {
     setFormDescription(recipe.description);
     setFormCuisine(recipe.cuisine || "");
     setFormDifficulty(recipe.difficulty);
+    setFormRecipeType(recipe.recipeType || "VEG");
     setFormCookTime(recipe.cookTime);
     setFormCalories(recipe.calories || "");
     setFormImageUrl(recipe.imageUrl || "");
@@ -192,6 +197,7 @@ export default function ProfilePage() {
   const validateForm = () => {
     const errors: Record<string, string> = {};
     if (!formTitle.trim()) errors.title = "Recipe Title is required";
+    if (!formRecipeType) errors.recipeType = "Recipe Type is required";
     if (!formDescription.trim()) errors.description = "A short description is required";
     
     // Filter out blank ingredients
@@ -226,6 +232,7 @@ export default function ProfilePage() {
       description: formDescription.trim(),
       cuisine: formCuisine.trim() || "Global",
       difficulty: formDifficulty,
+      recipeType: formRecipeType,
       cookTime: Number(formCookTime),
       calories: formCalories ? Number(formCalories) : null,
       imageUrl: formImageUrl.trim() || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&auto=format&fit=crop",
@@ -514,9 +521,18 @@ export default function ProfilePage() {
                         <span className="text-label-caps font-label-caps text-secondary tracking-widest uppercase text-xs">
                           {recipe.cuisine || "Global"}
                         </span>
-                        <span className="bg-[#e5e2da] text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-label-caps uppercase">
-                          {recipe.difficulty.toLowerCase()}
-                        </span>
+                        <div className="flex gap-2">
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-label-caps uppercase ${
+                            recipe.recipeType === "VEG"
+                              ? "bg-green-100 text-green-800 border border-green-200"
+                              : "bg-red-100 text-red-800 border border-red-200"
+                          }`}>
+                            {recipe.recipeType === "VEG" ? "Veg" : "Non-Veg"}
+                          </span>
+                          <span className="bg-[#e5e2da] text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-label-caps uppercase">
+                            {recipe.difficulty.toLowerCase()}
+                          </span>
+                        </div>
                       </div>
 
                       <h3 className="text-headline-md font-headline-md text-primary text-xl mb-2 line-clamp-1">
@@ -582,12 +598,12 @@ export default function ProfilePage() {
                 <span className="material-symbols-outlined text-secondary text-[20px]">history</span>
                 Recently Documented
               </h3>
-              {profile.recentActivity.created.length === 0 ? (
+              {profile.createdRecipes.length === 0 ? (
                 <p className="text-xs text-on-surface-variant italic font-label-accent">No entries logged yet.</p>
               ) : (
                 <div className="space-y-3">
-                  {profile.recentActivity.created.map((recipe) => (
-                    <Link key={recipe.id} href={`/recipes/${recipe.id}`} className="block">
+                  {(showAllCreated ? profile.createdRecipes : profile.recentActivity.created).map((recipe) => (
+                    <Link key={recipe.id} href={`/recipes/${recipe.id}`} className="block animate-fade-in-up">
                       <div className="flex items-center gap-4 p-3 bg-[#FFFFF0] border border-outline-variant/20 rounded-lg hover:bg-surface-container transition-colors shadow-sm">
                         <img className="w-12 h-12 rounded object-cover" src={recipe.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=200&auto=format&fit=crop"} alt="" />
                         <div className="flex-1 min-w-0">
@@ -598,22 +614,30 @@ export default function ProfilePage() {
                       </div>
                     </Link>
                   ))}
+                  {profile.createdRecipes.length > 3 && (
+                    <button
+                      onClick={() => setShowAllCreated(!showAllCreated)}
+                      className="text-xs font-label-caps tracking-widest text-secondary hover:underline cursor-pointer block mt-2 text-left"
+                    >
+                      {showAllCreated ? "Show Less" : "Show More"}
+                    </button>
+                  )}
                 </div>
               )}
             </div>
 
             {/* Recent Favorites Column */}
-            <div className="space-y-4">
+            <div id="saved-recipes" className="space-y-4 scroll-mt-24">
               <h3 className="font-headline-md text-primary text-xl italic flex items-center gap-2">
                 <span className="material-symbols-outlined text-secondary text-[20px]">bookmark</span>
                 Saved Heritage Recipes
               </h3>
-              {profile.recentActivity.favorited.length === 0 ? (
+              {profile.favoriteRecipes.length === 0 ? (
                 <p className="text-xs text-on-surface-variant italic font-label-accent">No saved bookmarks yet.</p>
               ) : (
                 <div className="space-y-3">
-                  {profile.recentActivity.favorited.map((recipe) => (
-                    <Link key={recipe.id} href={`/recipes/${recipe.id}`} className="block">
+                  {(showAllFavorited ? profile.favoriteRecipes : profile.recentActivity.favorited).map((recipe) => (
+                    <Link key={recipe.id} href={`/recipes/${recipe.id}`} className="block animate-fade-in-up">
                       <div className="flex items-center gap-4 p-3 bg-[#FFFFF0] border border-outline-variant/20 rounded-lg hover:bg-surface-container transition-colors shadow-sm">
                         <img className="w-12 h-12 rounded object-cover" src={recipe.imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=200&auto=format&fit=crop"} alt="" />
                         <div className="flex-1 min-w-0">
@@ -624,6 +648,14 @@ export default function ProfilePage() {
                       </div>
                     </Link>
                   ))}
+                  {profile.favoriteRecipes.length > 3 && (
+                    <button
+                      onClick={() => setShowAllFavorited(!showAllFavorited)}
+                      className="text-xs font-label-caps tracking-widest text-secondary hover:underline cursor-pointer block mt-2 text-left"
+                    >
+                      {showAllFavorited ? "Show Less" : "Show More"}
+                    </button>
+                  )}
                 </div>
               )}
             </div>
@@ -725,6 +757,19 @@ export default function ProfilePage() {
                       <option className="bg-[#FFFFF0] text-primary" value="EASY">Easy</option>
                       <option className="bg-[#FFFFF0] text-primary" value="MEDIUM">Medium</option>
                       <option className="bg-[#FFFFF0] text-primary" value="HARD">Hard</option>
+                    </select>
+                  </div>
+
+                  {/* Recipe Type */}
+                  <div className="space-y-2">
+                    <label className="font-label-caps text-xs text-on-surface-variant block font-bold">Recipe Type</label>
+                    <select
+                      value={formRecipeType}
+                      onChange={(e) => setFormRecipeType(e.target.value as any)}
+                      className="w-full bg-transparent border-0 border-b border-outline text-on-surface focus:border-secondary py-2 outline-none cursor-pointer"
+                    >
+                      <option className="bg-[#FFFFF0] text-primary" value="VEG">Vegetarian</option>
+                      <option className="bg-[#FFFFF0] text-primary" value="NON_VEG">Non-Vegetarian</option>
                     </select>
                   </div>
 

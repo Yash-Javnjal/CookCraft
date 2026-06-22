@@ -1,0 +1,15 @@
+/*
+  Warnings:
+
+  - Added the required column `userId` to the `Recipe` table without a default value. This is not possible if the table is not empty.
+
+*/
+-- CreateEnum
+CREATE TYPE "RecipeType" AS ENUM ('VEG', 'NON_VEG');
+
+-- AlterTable
+ALTER TABLE "Recipe" ADD COLUMN     "recipeType" "RecipeType" NOT NULL DEFAULT 'VEG',
+ADD COLUMN     "userId" TEXT NOT NULL;
+
+-- AddForeignKey
+ALTER TABLE "Recipe" ADD CONSTRAINT "Recipe_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

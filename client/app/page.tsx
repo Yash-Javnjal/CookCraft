@@ -24,6 +24,8 @@ export default function Home() {
       });
   }, []);
 
+  const topRecipes = recipes.slice(0, 6);
+
   return (
     <div className="w-full">
       {/* Hero Section */}
@@ -32,15 +34,12 @@ export default function Home() {
           <img
             className="w-full h-full object-cover"
             alt="rustic kitchen table"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfiIaRqmsaO0vJKiF_yxFLX7SJx_083wSN1WEilcFuv9TCaE-Eaw7tYWBGjK9pONE7QtkyAzY2LG_u8UPpue4i8uQAi3zzGo1WBIwstOjhAjdvy_Nu8oZqBriRPJYZxho79wfSvsB8u-xmNNkK1epSYQoslsWNbvjDsXtqzRUxjnlZXaWjAzDvqFgjeLxBuZstVhIvZs50yI4Ktwa1xFeblmmrUEv6u4KWb9UgK6zyvX42p6CyLKg2gcKxVdf6bKEsGS6AE1GkbbKv"
+            src="https://i.pinimg.com/736x/09/52/6a/09526a6b908856f823a1c5ae7d5eba42.jpg"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent"></div>
         </div>
         <div className="relative z-10 max-w-container-max mx-auto px-margin-desktop w-full">
           <div className="max-w-2xl space-y-6 text-left">
-            <span className="font-label-caps text-label-caps tracking-widest text-secondary uppercase block">
-              Established 2026
-            </span>
             <h1 className="font-headline-xl text-headline-xl text-primary leading-tight">
               Every Great Dish Begins with a Story.
             </h1>
@@ -71,23 +70,23 @@ export default function Home() {
             <p className="font-body-md text-on-surface-variant">Explore the world's most evocative flavor profiles.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-            {/* Mediterranean */}
+            {/* Indian */}
             <div className="group cursor-pointer card-lift bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm text-left">
               <Link href="/cuisines">
                 <div className="h-80 overflow-hidden relative">
                   <img
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    alt="Mediterranean spread"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBT1lcm5NTuFpMSqAsfwAsCTaBJGAH5kvhzVy8_0ydHpC9Y6K1zW29Orks6XJf_eCw_e-wTQxoGb54c4DukafpcJPHHDh4fqiPmJTxr0UtVf35EBj_bvyocfWn6Nj6ahzftulQiaAjriDg26gCOXRmcAnnkc2BxP5uG5CSn93xikXZVMCqc-Hy2s6qpYJ5v4yQVvSEGD2zj10toe_gMvd5my57fJuG2US8OMSNH2WYsi1pjBEwX8Qg2ivMuIVtet87cUaq0aJE2LOf"
+                    alt="Indian feast spread"
+                    src="https://images.stockcake.com/public/0/2/f/02f1ddcd-7014-4479-89de-6a6387442ab2_large/indian-feast-spread-stockcake.jpg"
                   />
                   <div className="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/60 to-transparent w-full">
-                    <span className="font-label-caps text-white/90 tracking-widest">Southern Europe</span>
+                    <span className="font-label-caps text-white/90 tracking-widest">South Asia</span>
                   </div>
                 </div>
                 <div className="p-8">
-                  <h3 className="font-headline-md text-headline-md text-primary mb-2">Mediterranean</h3>
+                  <h3 className="font-headline-md text-headline-md text-primary mb-2">Indian</h3>
                   <p className="font-body-md text-on-surface-variant mb-4 font-normal">
-                    A symphony of sun-ripened citrus, heavy oils, and the salt of the Ionian Sea.
+                    An ancient alchemy of spice, heat, and heart — from the char of a tandoor to the slow bloom of a curry.
                   </p>
                   <span className="font-label-caps text-secondary flex items-center gap-2 group-hover:gap-3 transition-all">
                     EXPLORE REGION <span className="material-symbols-outlined">arrow_right_alt</span>
@@ -96,23 +95,23 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Nordic */}
+            {/* American */}
             <div className="group cursor-pointer card-lift bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm text-left">
               <Link href="/cuisines">
                 <div className="h-80 overflow-hidden relative">
                   <img
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    alt="Nordic kitchen salmon dish"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVJlTHrq1B9-XPA3Gyd3Q1DKo7jj5bZc_aS_7CzY_q2Ajm1YYpn72P8I3Xo0SZRmvdNSym8RHH_jux9sdFdphWht8QxAYqGXNErA00TPd496SCk1D7fgWR28QnxpxFkyiOPaeNss4WapMlzlXI5U_qN8cKPD1P0x41hjFEADmRUup5MHx42gcSxT7-45ZJJPxr3-vpvAvSGWqWixAt68rMROIdmuvrzt7h-18huzjj7j_PQeS051BwQLD9J5QQTNKcKD288cGmn-aV"
+                    alt="American cuisine spread"
+                    src="https://cu-website-cms-prd.s3.us-east-1.amazonaws.com/american_cuisine_header_2b8ea6aebb.jpg"
                   />
                   <div className="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/60 to-transparent w-full">
-                    <span className="font-label-caps text-white/90 tracking-widest">Scandinavia</span>
+                    <span className="font-label-caps text-white/90 tracking-widest">North America</span>
                   </div>
                 </div>
                 <div className="p-8">
-                  <h3 className="font-headline-md text-headline-md text-primary mb-2">Nordic</h3>
+                  <h3 className="font-headline-md text-headline-md text-primary mb-2">American</h3>
                   <p className="font-body-md text-on-surface-variant mb-4 font-normal">
-                    Focused on the elemental purity of root, smoke, and preserved harvests.
+                    Bold, generous, and unapologetically diverse — from smoky Southern BBQ to diner counter classics.
                   </p>
                   <span className="font-label-caps text-secondary flex items-center gap-2 group-hover:gap-3 transition-all">
                     EXPLORE REGION <span className="material-symbols-outlined">arrow_right_alt</span>
@@ -121,23 +120,23 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* East Asian */}
+            {/* Mexican */}
             <div className="group cursor-pointer card-lift bg-surface-container rounded-xl overflow-hidden border border-outline-variant/20 shadow-sm text-left">
               <Link href="/cuisines">
                 <div className="h-80 overflow-hidden relative">
                   <img
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    alt="East Asian kitchen"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_PS1w_UEZS0kJs69JkqGu9cI28l25alJ2wU-KKHDsWQY3rIfIdbu4x9sDS21HLHxlXGorpREAP84a_6auJlNvRuZZ3y3683hJqo8p2HOhEXH--XmenyONK7wprIu4AboTNa5llWKg8lTMRXcY55WM2CMzFSJ7bfVoa9G_3XdcrJ3QZdcIvrnYf1wkM9ZCe1Ga56fonIXxAsbugBK_Pbyl1Jg11Sc2GXmwbQCF3ostR2qiyu7uZtSKlIoI4-ZoeDAqGp4HCc4Y8xj"
+                    alt="Mexican tacos and dishes"
+                    src="https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/hmlujvrb/fd6813c5-b6d8-4283-8bba-7786894144e7.jpg"
                   />
                   <div className="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/60 to-transparent w-full">
-                    <span className="font-label-caps text-white/90 tracking-widest">East Asia</span>
+                    <span className="font-label-caps text-white/90 tracking-widest">Latin America</span>
                   </div>
                 </div>
                 <div className="p-8">
-                  <h3 className="font-headline-md text-headline-md text-primary mb-2">East Asian</h3>
+                  <h3 className="font-headline-md text-headline-md text-primary mb-2">Mexican</h3>
                   <p className="font-body-md text-on-surface-variant mb-4 font-normal">
-                    Balancing the complex umami of aged ferments with sharp, aromatic zing.
+                    Vibrant, fiery, and deeply rooted in indigenous earthiness. The magic of masa, chillies, and slow-roasted meats.
                   </p>
                   <span className="font-label-caps text-secondary flex items-center gap-2 group-hover:gap-3 transition-all">
                     EXPLORE REGION <span className="material-symbols-outlined">arrow_right_alt</span>
@@ -145,6 +144,33 @@ export default function Home() {
                 </div>
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Share Your Recipe Section */}
+      <section className="py-20 bg-[#FFFFF0] border-t border-b border-outline-variant/30 relative">
+        <div className="max-w-container-max mx-auto px-margin-desktop relative z-10 flex flex-col md:flex-row items-center justify-between gap-12 text-left">
+          <div className="max-w-xl">
+            <span className="font-label-caps text-secondary text-label-caps tracking-widest block mb-2 uppercase">
+              COMMUNITY ARCHIVE
+            </span>
+            <h2 className="font-headline-lg text-headline-lg text-primary mb-4">Share Your Culinary Creations</h2>
+            <p className="font-body-lg text-on-surface-variant mb-6">
+              Do you have a family recipe passed down through generations, or a custom kitchen experiment you want to preserve? Document your story, ingredients, and steps in our digital archive and share it with other food enthusiasts.
+            </p>
+            <Link href="/profile">
+              <button className="px-8 py-3 bg-secondary text-on-secondary font-bold rounded-lg shadow-lg hover:bg-secondary-fixed transition-all active:scale-95">
+                Document Your Recipe
+              </button>
+            </Link>
+          </div>
+          <div className="w-full md:w-1/3 overflow-hidden rounded-2xl relative shadow-md h-64 bg-surface-container">
+            <img
+              className="w-full h-full object-cover"
+              src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?q=80&w=600&auto=format&fit=crop"
+              alt="handwritten recipe book"
+            />
           </div>
         </div>
       </section>
@@ -213,11 +239,24 @@ export default function Home() {
               <p className="font-label-accent italic text-on-surface-variant">No recipes found in the database.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-              {recipes.map((recipe) => (
-                <RecipeCard key={recipe.id} recipe={recipe} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                {topRecipes.map((recipe) => (
+                  <RecipeCard key={recipe.id} recipe={recipe} />
+                ))}
+              </div>
+
+              {recipes.length > 6 && (
+                <div className="flex justify-center mt-16">
+                  <Link href="/journal">
+                    <button className="px-10 py-4 bg-primary text-on-primary font-label-caps tracking-widest text-label-caps rounded-lg hover:shadow-lg transition-all active:scale-95 flex items-center gap-3">
+                      VIEW MORE RECIPES
+                      <span className="material-symbols-outlined">arrow_right_alt</span>
+                    </button>
+                  </Link>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

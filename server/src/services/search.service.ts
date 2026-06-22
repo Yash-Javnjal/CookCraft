@@ -10,6 +10,7 @@ type SearchResult = {
 	cookTime: number;
 	calories?: number | null;
 	difficulty: string;
+	recipeType: string;
 	cuisine?: string | null;
 	imageUrl?: string | null;
 	description?: string;
@@ -107,6 +108,7 @@ export class SearchService {
 				cookTime: r.cookTime,
 				calories: r.calories ?? null,
 				difficulty: String(r.difficulty),
+				recipeType: r.recipeType,
 				cuisine: r.cuisine ?? null,
 				imageUrl: r.imageUrl,
 				description: r.description,

@@ -1,0 +1,4 @@
+-- This migration removes the @default(cuid()) from the User.id field at the Prisma schema level.
+-- No actual SQL changes are required since the database column was already TEXT NOT NULL
+-- without any database-level DEFAULT. Prisma was generating the CUID client-side before insertion.
+-- This migration entry exists solely to keep Prisma migration history in sync with the schema.

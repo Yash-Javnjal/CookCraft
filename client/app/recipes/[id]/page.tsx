@@ -14,7 +14,7 @@ interface RecipeDetailsProps {
 
 export default function RecipeDetails({ params }: RecipeDetailsProps) {
   const router = useRouter();
-  const { user, isFavorite, toggleFavorite } = useAuth();
+  const { user, isInitialized, isFavorite, toggleFavorite } = useAuth();
   
   // Unwrap params using React.use() or standard unwrap since it is a Promise in Next.js 15
   const [id, setId] = useState<string | null>(null);
@@ -22,6 +22,13 @@ export default function RecipeDetails({ params }: RecipeDetailsProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [checkedIngredients, setCheckedIngredients] = useState<Record<string, boolean>>({});
+
+  // Redirect if user not logged in
+  useEffect(() => {
+    if (isInitialized && !user) {
+      router.push("/login");
+    }
+  }, [isInitialized, user, router]);
 
   useEffect(() => {
     params.then((res) => {
@@ -52,7 +59,7 @@ export default function RecipeDetails({ params }: RecipeDetailsProps) {
     }));
   };
 
-  if (loading) {
+  if (!isInitialized || loading) {
     return (
       <div className="py-24">
         <LoadingState />
@@ -135,6 +142,14 @@ export default function RecipeDetails({ params }: RecipeDetailsProps) {
                   {recipe.cuisine}
                 </div>
               )}
+              <div className={`px-4 py-1.5 rounded-full font-label-caps text-label-caps uppercase flex items-center gap-1 border ${
+                recipe.recipeType === "VEG"
+                  ? "bg-green-50/70 text-green-800 border-green-200"
+                  : "bg-red-50/70 text-red-800 border-red-200"
+              } shadow-sm`}>
+                <span className="material-symbols-outlined text-[16px]">fiber_manual_record</span>
+                {recipe.recipeType === "VEG" ? "Vegetarian" : "Non-Veg"}
+              </div>
               <div className="bg-surface-variant text-on-surface-variant px-4 py-1.5 rounded-full font-label-caps text-label-caps uppercase flex items-center gap-1 border border-outline-variant/30">
                 <span className="material-symbols-outlined text-[16px]">schedule</span>
                 {recipe.cookTime} Min

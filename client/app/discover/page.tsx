@@ -10,6 +10,7 @@ import Link from "next/link";
 
 export default function Discover() {
   const [selectedRegion, setSelectedRegion] = useState("Any Region");
+  const [selectedType, setSelectedType] = useState<"ANY" | "VEG" | "NON_VEG">("ANY");
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
@@ -28,13 +29,18 @@ export default function Discover() {
     setHasSearched(true);
     try {
       const data = await searchService.searchRecipes(ingredients);
-      // Filter by region if selected
-      const filtered =
-        selectedRegion === "Any Region"
-          ? data
-          : data.filter(
-              (r) => r.cuisine?.toLowerCase() === selectedRegion.toLowerCase()
-            );
+      // Filter by region and type if selected
+      let filtered = data;
+      if (selectedRegion !== "Any Region") {
+        filtered = filtered.filter(
+          (r) => r.cuisine?.toLowerCase() === selectedRegion.toLowerCase()
+        );
+      }
+      if (selectedType !== "ANY") {
+        filtered = filtered.filter(
+          (r) => r.recipeType === selectedType
+        );
+      }
       setResults(filtered);
     } catch (err: any) {
       console.error("Search failed:", err);
@@ -58,6 +64,8 @@ export default function Discover() {
       <SearchBar
         selectedRegion={selectedRegion}
         setSelectedRegion={setSelectedRegion}
+        selectedType={selectedType}
+        setSelectedType={setSelectedType}
         ingredients={ingredients}
         setIngredients={setIngredients}
         regions={regions}
@@ -85,6 +93,8 @@ export default function Discover() {
                 setHasSearched(false);
                 setResults([]);
                 setIngredients([]);
+                setSelectedType("ANY");
+                setSelectedRegion("Any Region");
               }}
               className="text-sm text-secondary hover:underline font-label-caps"
             >

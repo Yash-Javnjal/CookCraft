@@ -1,4 +1,5 @@
 export type Difficulty = "EASY" | "MEDIUM" | "HARD";
+export type RecipeType = "VEG" | "NON_VEG";
 export type DietType = "VEGETARIAN" | "VEGAN" | "HIGH_PROTEIN" | "KETO" | "NONE";
 
 export interface IngredientInfo {
@@ -32,6 +33,7 @@ export interface Recipe {
   cuisine: string | null;
   description: string;
   dietType: DietType;
+  recipeType: RecipeType;
   ingredients: RecipeIngredient[];
   steps: RecipeStep[];
 }
@@ -44,6 +46,7 @@ export interface SearchResult {
   cookTime: number;
   calories: number | null;
   difficulty: Difficulty | string;
+  recipeType?: RecipeType;
   cuisine: string | null;
   imageUrl?: string | null;
   description?: string;

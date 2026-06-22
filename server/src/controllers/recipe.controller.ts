@@ -97,6 +97,11 @@ export class RecipeController {
         res.status(400).json({ success: false, message: "userId is required to create a recipe." });
         return;
       }
+      const { recipeType } = recipeData;
+      if (!recipeType || (recipeType !== "VEG" && recipeType !== "NON_VEG")) {
+        res.status(400).json({ success: false, message: "recipeType is required and must be either 'VEG' or 'NON_VEG'." });
+        return;
+      }
       const recipe = await this.recipeService.createRecipe(userId, recipeData);
       res.status(201).json({ success: true, data: recipe });
     } catch (error) {
@@ -114,6 +119,11 @@ export class RecipeController {
       const recipeData = req.body;
       if (!id) {
         res.status(400).json({ success: false, message: "Recipe ID is required." });
+        return;
+      }
+      const { recipeType } = recipeData;
+      if (!recipeType || (recipeType !== "VEG" && recipeType !== "NON_VEG")) {
+        res.status(400).json({ success: false, message: "recipeType is required and must be either 'VEG' or 'NON_VEG'." });
         return;
       }
       const recipe = await this.recipeService.updateRecipe(id, recipeData);

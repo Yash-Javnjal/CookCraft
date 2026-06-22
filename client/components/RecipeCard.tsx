@@ -14,6 +14,7 @@ interface RecipeCardProps {
     cookTime?: number;
     calories?: number | null;
     difficulty?: string;
+    recipeType?: string;
     cuisine?: string | null;
     description?: string;
     matchPercentage?: number;
@@ -31,6 +32,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
   const cookTime = recipe.cookTime || 0;
   const calories = recipe.calories || null;
   const difficulty = recipe.difficulty || "MEDIUM";
+  const recipeType = recipe.recipeType || "VEG";
   const cuisine = recipe.cuisine || "Global";
   const description = recipe.description || "A delicious handcrafted culinary creation from our journal.";
   const matchPercentage = recipe.matchPercentage;
@@ -72,6 +74,13 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
               {cuisine}
             </span>
             <div className="flex gap-2">
+              <span className={`px-2 py-0.5 rounded text-xs font-label-caps uppercase ${
+                recipeType === "VEG"
+                  ? "bg-green-100 text-green-800 border border-green-200"
+                  : "bg-red-100 text-red-800 border border-red-200"
+              }`}>
+                {recipeType === "VEG" ? "Veg" : "Non-Veg"}
+              </span>
               <span className="bg-[#e5e2da] text-on-surface-variant px-2 py-0.5 rounded text-xs font-label-caps uppercase">
                 {difficulty.toLowerCase()}
               </span>

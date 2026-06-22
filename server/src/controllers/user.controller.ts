@@ -2,22 +2,26 @@
 
 import { Request, Response, NextFunction } from "express";
 import { prisma } from "../../prisma/prisma";
+import { randomUUID } from "crypto";
 
 export class UserController {
   /**
    * POST /api/users/sync
    * Upserts the user on login/registration in the database.
+   * - If `id` is provided (Supabase Auth UUID), look up by id first.
+   * - If a different record exists for the same email (old cuid), re-link all data.
+   * - If `id` is not provided (mock email/password), look up by email or generate a UUID.
    */
   syncUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { email, name } = req.body;
+      const { id: authId, email, name, createdAt } = req.body;
 
       if (!email) {
         res.status(400).json({ success: false, message: "Email is required to sync user." });
         return;
       }
 
-      // Extract a chef name from the email if not provided
+      // Derive name from email if not provided
       let finalName = name || "";
       if (!finalName) {
         const parts = email.split("@")[0].split(/[._-]/);
@@ -27,24 +31,75 @@ export class UserController {
         if (!finalName) finalName = "Chef";
       }
 
-      // Upsert the user
-      const user = await prisma.user.upsert({
-        where: { email },
-        update: { name: finalName },
-        create: {
+      // Determine which ID to use
+      const targetId: string = authId || randomUUID();
+
+      // Check if a user already exists for this ID
+      const existingById = await prisma.user.findUnique({ where: { id: targetId } });
+
+      if (existingById) {
+        // User already linked to this Auth ID — just update name/email in case they changed
+        const updated = await prisma.user.update({
+          where: { id: targetId },
+          data: { name: finalName, email },
+        });
+        res.status(200).json({ success: true, data: updated });
+        return;
+      }
+
+      // No user with that id yet — check if there's a record for this email (old cuid-based record)
+      const existingByEmail = await prisma.user.findUnique({ where: { email } });
+
+      if (existingByEmail && existingByEmail.id !== targetId) {
+        // Email exists under a different ID (old cuid). Re-link all relations.
+        const oldId = existingByEmail.id;
+
+        await prisma.$transaction(async (tx) => {
+          // 1. Temporarily free the email constraint by renaming the old user
+          await tx.user.update({
+            where: { id: oldId },
+            data: { email: `__migrating__${oldId}@cookcraft.internal` },
+          });
+
+          // 2. Create the new user with the Auth UUID
+          await tx.user.create({
+            data: {
+              id: targetId,
+              email,
+              name: finalName,
+              ...(createdAt ? { createdAt: new Date(createdAt) } : {}),
+            },
+          });
+
+          // 3. Re-link recipes and favorites to the new ID
+          await tx.recipe.updateMany({ where: { userId: oldId }, data: { userId: targetId } });
+          await tx.favorite.updateMany({ where: { userId: oldId }, data: { userId: targetId } });
+
+          // 4. Delete the old user record
+          await tx.user.delete({ where: { id: oldId } });
+        });
+
+        const newUser = await prisma.user.findUnique({ where: { id: targetId } });
+        res.status(200).json({ success: true, data: newUser });
+        return;
+      }
+
+      // No existing record at all — create a fresh one
+      const user = await prisma.user.create({
+        data: {
+          id: targetId,
           email,
           name: finalName,
+          ...(createdAt ? { createdAt: new Date(createdAt) } : {}),
         },
       });
 
-      res.status(200).json({
-        success: true,
-        data: user,
-      });
+      res.status(200).json({ success: true, data: user });
     } catch (error) {
       next(error);
     }
   };
+
 
   /**
    * GET /api/users/profile/:id

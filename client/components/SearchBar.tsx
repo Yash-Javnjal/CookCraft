@@ -5,6 +5,8 @@ import React, { useState } from "react";
 interface SearchBarProps {
   selectedRegion: string;
   setSelectedRegion: (region: string) => void;
+  selectedType: "ANY" | "VEG" | "NON_VEG";
+  setSelectedType: (type: "ANY" | "VEG" | "NON_VEG") => void;
   ingredients: string[];
   setIngredients: (ingredients: string[]) => void;
   regions: string[];
@@ -15,6 +17,8 @@ interface SearchBarProps {
 export default function SearchBar({
   selectedRegion,
   setSelectedRegion,
+  selectedType,
+  setSelectedType,
   ingredients,
   setIngredients,
   regions,
@@ -51,8 +55,8 @@ export default function SearchBar({
       <div className="texture-overlay"></div>
       <div className="relative z-20 flex flex-col md:flex-row items-center gap-6">
         {/* Region Selection */}
-        <div className="w-full md:w-1/3">
-          <label className="block text-label-caps font-label-caps text-on-surface-variant mb-2 uppercase tracking-widest text-left">
+        <div className="w-full md:w-1/4">
+          <label className="block text-label-caps font-label-caps text-on-surface-variant mb-2 uppercase tracking-widest text-left text-xs">
             Select Region
           </label>
           <div className="relative">
@@ -74,8 +78,29 @@ export default function SearchBar({
           </div>
         </div>
 
+        {/* Recipe Type Selection */}
+        <div className="w-full md:w-1/4">
+          <label className="block text-label-caps font-label-caps text-on-surface-variant mb-2 uppercase tracking-widest text-left text-xs">
+            Recipe Type
+          </label>
+          <div className="relative">
+            <select
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value as any)}
+              className="w-full bg-transparent border-none border-b border-outline-variant pb-2 text-body-lg font-body-lg focus:outline-none focus:border-secondary appearance-none rounded-none text-left"
+            >
+              <option value="ANY">Any Type</option>
+              <option value="VEG">Vegetarian</option>
+              <option value="NON_VEG">Non-Vegetarian</option>
+            </select>
+            <span className="material-symbols-outlined absolute right-0 top-1 text-outline pointer-events-none">
+              expand_more
+            </span>
+          </div>
+        </div>
+
         {/* Add Separator */}
-        <div className="flex items-center justify-center text-outline-variant px-4">
+        <div className="flex items-center justify-center text-outline-variant px-2">
           <span className="material-symbols-outlined text-2xl font-light">add</span>
         </div>
 
