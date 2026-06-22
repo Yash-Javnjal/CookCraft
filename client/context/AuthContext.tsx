@@ -4,17 +4,19 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 
 interface User {
+  id?: string;
   name: string;
   email: string;
+  createdAt?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   favorites: string[];
-  login: (email: string, name?: string) => void;
-  register: (email: string, name: string) => void;
+  login: (email: string, name?: string) => Promise<void>;
+  register: (email: string, name: string) => Promise<void>;
   logout: () => void;
-  toggleFavorite: (recipeId: string) => void;
+  toggleFavorite: (recipeId: string) => Promise<void>;
   isFavorite: (recipeId: string) => boolean;
   signInWithGoogle: () => Promise<void>;
   sendPasswordReset: (email: string) => Promise<{ error: any | null }>;
@@ -46,6 +48,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // Helper to sync user with backend DB and load their favorites
+  const syncUserWithBackend = async (email: string, name: string): Promise<User | null> => {
+    try {
+      const { api } = await import("../lib/api");
+      const res = await api.post<{ success: boolean; data: any }>("/users/sync", { email, name });
+      if (res.data.success && res.data.data) {
+        const dbUser = res.data.data;
+        const mappedUser: User = {
+          id: dbUser.id,
+          name: dbUser.name,
+          email: dbUser.email,
+          createdAt: dbUser.createdAt,
+        };
+        setUser(mappedUser);
+
+        // Fetch user favorites from backend
+        try {
+          const favRes = await api.get<{ success: boolean; data: string[] }>(`/favorites/${dbUser.id}`);
+          if (favRes.data.success && favRes.data.data) {
+            setFavorites(favRes.data.data);
+          }
+        } catch (favErr) {
+          console.error("Error fetching user favorites from backend:", favErr);
+        }
+        return mappedUser;
+      }
+    } catch (err) {
+      console.error("Error syncing user with backend:", err);
+    }
+    return null;
+  };
+
   // Load user session and favorites on client mount
   useEffect(() => {
     let mounted = true;
@@ -53,21 +87,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     async function init() {
       if (!supabase) {
         console.warn("Supabase client is not initialized. Auth and OAuth are disabled.");
+        
+        // Mock fallback if user existed in local storage or something (for dev fallback)
+        const storedFavorites = localStorage.getItem("cookcraft_favorites");
+        if (storedFavorites) {
+          try {
+            setFavorites(JSON.parse(storedFavorites));
+          } catch (e) {
+            console.error("Error parsing stored favorites:", e);
+          }
+        }
         setIsInitialized(true);
         return;
       }
 
-      // Read current Supabase session (no local user storage)
+      // Read current Supabase session
       const { data } = await supabase.auth.getSession();
       const session = data?.session;
       if (mounted && session?.user) {
         const u = mapSupabaseUserToUser(session.user);
-        setUser(u);
+        await syncUserWithBackend(u.email, u.name);
       }
 
-      // favorites still loaded from localStorage for now
+      // fallback load of favorites from local storage if not synced yet
       const storedFavorites = localStorage.getItem("cookcraft_favorites");
-      if (storedFavorites) {
+      if (storedFavorites && favorites.length === 0) {
         try {
           setFavorites(JSON.parse(storedFavorites));
         } catch (e) {
@@ -78,11 +122,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsInitialized(true);
 
       // Subscribe to auth changes
-      supabase.auth.onAuthStateChange((_event, session) => {
+      supabase.auth.onAuthStateChange(async (_event, session) => {
+        if (!mounted) return;
         if (session?.user) {
-          setUser(mapSupabaseUserToUser(session.user));
+          const u = mapSupabaseUserToUser(session.user);
+          await syncUserWithBackend(u.email, u.name);
         } else {
           setUser(null);
+          setFavorites([]);
         }
       });
     }
@@ -94,16 +141,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Do not persist user locally. Supabase manages sessions.
-
-  // Sync favorites list to localStorage
+  // Sync favorites list to localStorage as backup cache
   useEffect(() => {
     if (!isInitialized) return;
     localStorage.setItem("cookcraft_favorites", JSON.stringify(favorites));
   }, [favorites, isInitialized]);
 
-  const login = (email: string, name?: string) => {
-    // If name is not provided, extract from email (e.g. chef.john@example.com -> Chef John)
+  const login = async (email: string, name?: string) => {
     let extractedName = name || "";
     if (!extractedName) {
       const parts = email.split("@")[0].split(/[._-]/);
@@ -113,13 +157,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!extractedName) extractedName = "Chef";
     }
 
-    const newUser = { email, name: extractedName };
-    setUser(newUser);
+    await syncUserWithBackend(email, extractedName);
   };
 
-  const register = (email: string, name: string) => {
-    const newUser = { email, name };
-    setUser(newUser);
+  const register = async (email: string, name: string) => {
+    await syncUserWithBackend(email, name);
   };
 
   const logout = () => {
@@ -128,6 +170,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     setUser(null);
     setFavorites([]);
+    localStorage.removeItem("cookcraft_favorites");
   };
 
   const signInWithGoogle = async () => {
@@ -135,7 +178,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error("Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.");
     }
 
-    // Redirects to Google OAuth flow
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: window.location.origin },
@@ -153,19 +195,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error };
   };
 
-  const toggleFavorite = (recipeId: string) => {
-    if (!user) {
+  const toggleFavorite = async (recipeId: string) => {
+    if (!user || !user.id) {
       // User must be signed in to toggle favorites
       return;
     }
 
-    setFavorites((prev) => {
-      if (prev.includes(recipeId)) {
-        return prev.filter((id) => id !== recipeId);
-      } else {
-        return [...prev, recipeId];
+    try {
+      const { api } = await import("../lib/api");
+      const res = await api.post<{ success: boolean; favorited: boolean }>("/favorites/toggle", {
+        userId: user.id,
+        recipeId,
+      });
+
+      if (res.data.success) {
+        setFavorites((prev) => {
+          if (prev.includes(recipeId)) {
+            return prev.filter((id) => id !== recipeId);
+          } else {
+            return [...prev, recipeId];
+          }
+        });
       }
-    });
+    } catch (err) {
+      console.error("Error toggling favorite on backend:", err);
+      // Fallback toggling locally in case backend is offline
+      setFavorites((prev) => {
+        if (prev.includes(recipeId)) {
+          return prev.filter((id) => id !== recipeId);
+        } else {
+          return [...prev, recipeId];
+        }
+      });
+    }
   };
 
   const isFavorite = (recipeId: string) => {

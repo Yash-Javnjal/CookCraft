@@ -77,4 +77,147 @@ export class RecipeService {
 
     return recipes;
   }
+
+  /**
+   * Create a new recipe belonging to a user, with nested ingredients and steps.
+   */
+  async createRecipe(userId: string, data: any) {
+    const ingredientNames: string[] = Array.from(
+      new Set((data.ingredients || []).map((i: any) => String(i.name).trim()))
+    );
+
+    // Create any ingredients that do not exist yet
+    if (ingredientNames.length > 0) {
+      await prisma.ingredient.createMany({
+        data: ingredientNames.map((name) => ({ name })),
+        skipDuplicates: true,
+      });
+    }
+
+    const dbIngredients = await prisma.ingredient.findMany({
+      where: { name: { in: ingredientNames } },
+    });
+    const ingredientIdsByName = new Map(
+      dbIngredients.map((i) => [i.name.toLowerCase().trim(), i.id])
+    );
+
+    // Create the Recipe and related steps in a single transaction
+    const recipe = await prisma.recipe.create({
+      data: {
+        userId,
+        title: data.title,
+        description: data.description,
+        cuisine: data.cuisine || null,
+        difficulty: data.difficulty,
+        cookTime: Number(data.cookTime),
+        calories: data.calories ? Number(data.calories) : null,
+        imageUrl: data.imageUrl || null,
+        steps: {
+          create: (data.steps || []).map((s: any) => ({
+            stepNumber: Number(s.stepNumber),
+            instruction: s.instruction.trim(),
+          })),
+        },
+      },
+    });
+
+    // Create the RecipeIngredient records
+    if (data.ingredients && data.ingredients.length > 0) {
+      await prisma.recipeIngredient.createMany({
+        data: data.ingredients.map((ing: any) => {
+          const ingId = ingredientIdsByName.get(ing.name.toLowerCase().trim());
+          if (!ingId) {
+            throw new Error(`Ingredient "${ing.name}" not found after database sync.`);
+          }
+          return {
+            recipeId: recipe.id,
+            ingredientId: ingId,
+            quantity: ing.quantity.trim(),
+          };
+        }),
+      });
+    }
+
+    return this.getRecipeById(recipe.id);
+  }
+
+  /**
+   * Update an existing recipe, recreating its nested steps and ingredients.
+   */
+  async updateRecipe(id: string, data: any) {
+    const ingredientNames: string[] = Array.from(
+      new Set((data.ingredients || []).map((i: any) => String(i.name).trim()))
+    );
+
+    if (ingredientNames.length > 0) {
+      await prisma.ingredient.createMany({
+        data: ingredientNames.map((name) => ({ name })),
+        skipDuplicates: true,
+      });
+    }
+
+    const dbIngredients = await prisma.ingredient.findMany({
+      where: { name: { in: ingredientNames } },
+    });
+    const ingredientIdsByName = new Map(
+      dbIngredients.map((i) => [i.name.toLowerCase().trim(), i.id])
+    );
+
+    // Delete old steps and ingredients, and update recipe fields
+    await prisma.$transaction([
+      prisma.recipe.update({
+        where: { id },
+        data: {
+          title: data.title,
+          description: data.description,
+          cuisine: data.cuisine || null,
+          difficulty: data.difficulty,
+          cookTime: Number(data.cookTime),
+          calories: data.calories ? Number(data.calories) : null,
+          imageUrl: data.imageUrl || null,
+        },
+      }),
+      prisma.recipeStep.deleteMany({ where: { recipeId: id } }),
+      prisma.recipeIngredient.deleteMany({ where: { recipeId: id } }),
+    ]);
+
+    // Recreate steps
+    if (data.steps && data.steps.length > 0) {
+      await prisma.recipeStep.createMany({
+        data: data.steps.map((s: any) => ({
+          recipeId: id,
+          stepNumber: Number(s.stepNumber),
+          instruction: s.instruction.trim(),
+        })),
+      });
+    }
+
+    // Recreate ingredients
+    if (data.ingredients && data.ingredients.length > 0) {
+      await prisma.recipeIngredient.createMany({
+        data: data.ingredients.map((ing: any) => {
+          const ingId = ingredientIdsByName.get(ing.name.toLowerCase().trim());
+          if (!ingId) {
+            throw new Error(`Ingredient "${ing.name}" not found during update.`);
+          }
+          return {
+            recipeId: id,
+            ingredientId: ingId,
+            quantity: ing.quantity.trim(),
+          };
+        }),
+      });
+    }
+
+    return this.getRecipeById(id);
+  }
+
+  /**
+   * Delete a recipe. Relations will cascade delete.
+   */
+  async deleteRecipe(id: string) {
+    return prisma.recipe.delete({
+      where: { id },
+    });
+  }
 }

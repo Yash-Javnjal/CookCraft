@@ -12,10 +12,13 @@ model User {
   name      String
   createdAt DateTime   @default(now())
   favorites Favorite[]
+  recipes   Recipe[]
 }
 
 model Recipe {
   id          String             @id @default(cuid())
+  userId      String
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   title       String
   imageUrl    String?
   cookTime    Int

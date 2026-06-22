@@ -85,4 +85,59 @@ export class RecipeController {
       next(error);
     }
   };
+
+  createRecipe = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const { userId, ...recipeData } = req.body;
+      if (!userId) {
+        res.status(400).json({ success: false, message: "userId is required to create a recipe." });
+        return;
+      }
+      const recipe = await this.recipeService.createRecipe(userId, recipeData);
+      res.status(201).json({ success: true, data: recipe });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateRecipe = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const id = String(req.params.id);
+      const recipeData = req.body;
+      if (!id) {
+        res.status(400).json({ success: false, message: "Recipe ID is required." });
+        return;
+      }
+      const recipe = await this.recipeService.updateRecipe(id, recipeData);
+      res.status(200).json({ success: true, data: recipe });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteRecipe = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const id = String(req.params.id);
+      if (!id) {
+        res.status(400).json({ success: false, message: "Recipe ID is required." });
+        return;
+      }
+      await this.recipeService.deleteRecipe(id);
+      res.status(200).json({ success: true, message: "Recipe deleted successfully." });
+    } catch (error) {
+      next(error);
+    }
+  };
 }

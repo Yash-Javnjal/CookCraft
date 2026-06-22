@@ -560,8 +560,9 @@ const transactionOptions = {
   timeout: 60_000,
 };
 
-function getRecipeData(recipe: SeedRecipe) {
+function getRecipeData(recipe: SeedRecipe, userId: string) {
   return {
+    userId,
     title: recipe.title,
     description: recipe.description,
     cuisine: recipe.cuisine,
@@ -575,6 +576,16 @@ function getRecipeData(recipe: SeedRecipe) {
 
 async function main() {
   const ingredientNames = new Set<string>();
+
+  // Ensure default system user exists
+  const systemUser = await prisma.user.upsert({
+    where: { email: "chef@cookcraft.com" },
+    update: {},
+    create: {
+      email: "chef@cookcraft.com",
+      name: "System Chef",
+    },
+  });
 
   for (const recipe of recipes) {
     for (const ingredient of recipe.ingredients) {
@@ -611,10 +622,10 @@ async function main() {
     const savedRecipe = existingRecipeId
       ? await prisma.recipe.update({
           where: { id: existingRecipeId },
-          data: getRecipeData(recipe),
+          data: getRecipeData(recipe, systemUser.id),
         })
       : await prisma.recipe.create({
-          data: getRecipeData(recipe),
+          data: getRecipeData(recipe, systemUser.id),
         });
 
     recipeIdsByTitle.set(recipe.title, savedRecipe.id);

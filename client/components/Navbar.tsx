@@ -164,6 +164,14 @@ export default function Navbar() {
 
                       <div className="w-full border-t border-outline-variant/30 pt-3 flex flex-col gap-2">
                         <Link
+                          href="/profile"
+                          onClick={() => setProfileOpen(false)}
+                          className="w-full py-2 hover:bg-surface-container rounded text-left px-3 text-sm font-body-md text-primary flex items-center gap-2 transition-colors"
+                        >
+                          <span className="material-symbols-outlined text-sm">menu_book</span>
+                          <span>My Culinary Archive</span>
+                        </Link>
+                        <Link
                           href="/discover"
                           onClick={() => setProfileOpen(false)}
                           className="w-full py-2 hover:bg-surface-container rounded text-left px-3 text-sm font-body-md text-primary flex items-center gap-2 transition-colors"

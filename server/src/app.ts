@@ -4,6 +4,8 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import recipeRoutes from "./routes/recipe.route";
 import searchRoutes from "./routes/search.route";
+import userRoutes from "./routes/user.route";
+import favoriteRoutes from "./routes/favorite.route";
 
 const app: Application = express();
 
@@ -17,6 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/search", searchRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/favorites", favoriteRoutes);
 
 // Health check
 app.get("/api/health", (_req: Request, res: Response) => {
