@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import LenisProvider from "@/components/LenisProvider";
 import PageTransition from "@/components/PageTransition";
 import Navbar from "@/components/Navbar";
@@ -32,6 +33,7 @@ export default function RootLayout({
             <Footer />
           </LenisProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
