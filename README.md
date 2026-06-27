@@ -1,442 +1,127 @@
-# 🍳 CookCraft
+# CookCraft
 
-> Discover recipes from ingredients you already have.
+A full-stack recipe discovery platform that helps users find recipes based on ingredients they already have. Users can search by ingredient, browse by cuisine, create and manage their own recipes, and save favorites — all through a polished, editorial-style interface.
 
-CookCraft is a modern full-stack recipe discovery platform that helps users find recipes based on the ingredients available in their kitchen. Instead of searching for a recipe first and then purchasing ingredients, users input what they have and discover what they can cook.
+**Live:** [cook-craft-eosin.vercel.app](https://cook-craft-eosin.vercel.app)
 
----
-
-## ✨ Vision
-
-Millions of people open their refrigerator every day and ask the same question:
-
-> "What can I cook with what I already have?"
-
-CookCraft aims to answer that question instantly through intelligent ingredient matching, recipe discovery, and a seamless user experience.
+**Author:** [Yash Javanjal](https://github.com/Yash-Javnjal)
 
 ---
 
-## 🚀 Core Features
+## Tech Stack
 
-### Ingredient-Based Recipe Search
+| Layer          | Technology                                              |
+| -------------- | ------------------------------------------------------- |
+| Frontend       | Next.js 16, React 19, TypeScript, Tailwind CSS 4        |
+| Animations     | Framer Motion, Lenis (smooth scroll)                    |
+| Backend        | Node.js, Express 5, TypeScript                          |
+| Database       | PostgreSQL (Supabase)                                   |
+| ORM            | Prisma 7                                                |
+| Authentication | Supabase Auth                                           |
+| Deployment     | Vercel (client), Railway (server)                       |
 
-Search recipes using available ingredients.
+---
 
-Example:
+## Features
 
-```text
-Eggs, Cheese, Onion, Tomato
+- **Ingredient-Based Search** — Input available ingredients and get ranked recipes with a match percentage and missing-ingredient breakdown.
+- **Recipe CRUD** — Authenticated users can create, edit, and delete their own recipes with ingredients, step-by-step instructions, images, and metadata.
+- **Favorites System** — Save and manage a personal collection of bookmarked recipes.
+- **Cuisine Browsing** — Explore recipes filtered by cuisine, difficulty, cook time, and dietary preference.
+- **User Profile Dashboard** — View personal stats (recipes created, favorites saved, most-used cuisine, total cook time), manage recipes, and track recent activity.
+- **Detailed Recipe Pages** — Full recipe view with ingredients, instructions, nutrition info, and related metadata.
+
+---
+
+## Architecture
+
+```
+Client (Next.js)  →  REST API (Express)  →  Prisma ORM  →  PostgreSQL
 ```
 
-CookCraft returns recipes that best match the provided ingredients.
+### API Routes
 
----
+| Method   | Endpoint                    | Description                  |
+| -------- | --------------------------- | ---------------------------- |
+| `GET`    | `/api/recipes`              | List all recipes             |
+| `GET`    | `/api/recipes/:id`          | Get recipe by ID             |
+| `GET`    | `/api/recipes/cuisine/:name`| Get recipes by cuisine       |
+| `POST`   | `/api/recipes`              | Create a recipe              |
+| `PUT`    | `/api/recipes/:id`          | Update a recipe              |
+| `DELETE` | `/api/recipes/:id`          | Delete a recipe              |
+| `GET`    | `/api/search?q=`            | Search recipes by ingredient |
+| `POST`   | `/api/favorites`            | Add a favorite               |
+| `DELETE` | `/api/favorites`            | Remove a favorite            |
+| `GET`    | `/api/users/profile/:id`    | Get user profile & stats     |
 
-### Smart Match Percentage
+### Data Model
 
-Each recipe includes a compatibility score.
-
-Example:
-
-```text
-Cheese Omelette
-
-95% Match
-
-Missing:
-- Milk
+```
+User ──< Recipe ──< RecipeStep
+              │
+              ├──< RecipeIngredient >── Ingredient
+              │
+              └──< Favorite >── User
 ```
 
-Users immediately understand how close they are to preparing a recipe.
+Core entities: `User`, `Recipe`, `Ingredient`, `RecipeIngredient`, `RecipeStep`, `Favorite`. Enums for `Difficulty`, `DietType`, and `RecipeType`.
 
 ---
 
-### Recipe Discovery
+## Project Structure
 
-Browse recipes with:
-
-* Images
-* Cook Time
-* Calories
-* Difficulty
-* Cuisine
-* Ingredient Match Score
-
----
-
-### Detailed Recipe Pages
-
-Every recipe contains:
-
-* Ingredients
-* Step-by-step instructions
-* Nutrition information
-* Missing ingredients
-* Preparation details
-
----
-
-### Favorites System
-
-Authenticated users can:
-
-* Save recipes
-* View saved recipes
-* Manage personal collections
-
----
-
-### Advanced Filtering
-
-Filter recipes by:
-
-* Cuisine
-* Difficulty
-* Cook Time
-* Dietary Preference
-
----
-
-## 🏗️ Architecture
-
-```text
-User
- │
- ▼
-Next.js Frontend
- │
- ▼
-Express API
- │
- ▼
-Prisma ORM
- │
- ▼
-PostgreSQL Database
 ```
-
----
-
-## 🛠️ Technology Stack
-
-### Frontend
-
-* Next.js
-* TypeScript
-* CSS Modules
-* Framer Motion
-
-### Backend
-
-* Node.js
-* Express.js
-* TypeScript
-
-### Database
-
-* PostgreSQL (Supabase)
-
-### ORM
-
-* Prisma
-
-### Authentication
-
-* Supabase Auth
-* Google OAuth (Planned)
-
-### Deployment
-
-* Vercel
-* Railway / Render
-* Supabase
-
----
-
-## 📂 Project Structure
-
-```text
 cookcraft/
-
 ├── client/
-│   ├── src/
-│   └── public/
+│   ├── app/              # Next.js App Router pages
+│   ├── components/       # Reusable UI components
+│   ├── context/          # Auth context provider
+│   ├── services/         # API service layer
+│   ├── lib/              # Axios instance & utilities
+│   └── types/            # TypeScript type definitions
 │
-├── server/
-│   ├── prisma/
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   ├── middleware/
-│   │   └── utils/
-│
-└── docs/
-    ├── architecture.md
-    ├── api-routes.md
-    ├── database-design.md
-    └── project-roadmap.md
+└── server/
+    ├── prisma/            # Schema & migrations
+    └── src/
+        ├── controllers/   # Request handlers
+        ├── routes/        # Express route definitions
+        └── services/      # Business logic layer
 ```
 
 ---
 
-## 🗄️ Database Design
-
-Primary entities:
-
-* Users
-* Recipes
-* Ingredients
-* Recipe Ingredients
-* Recipe Steps
-* Favorites
-
-Relationships are managed through Prisma and PostgreSQL.
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-Make sure you have the following installed:
-- Node.js (v16 or higher)
-- npm or yarn
-- PostgreSQL database (or Supabase account)
+- Node.js ≥ 16
+- PostgreSQL database (or [Supabase](https://supabase.com) account)
 
-### Environment Setup
+### Setup
 
-1. Clone the repository:
 ```bash
 git clone https://github.com/Yash-Javnjal/CookCraft.git
 cd CookCraft
-```
 
-2. Create `.env.local` files in both `client/` and `server/` directories with the required environment variables.
-
----
-
-## 💾 Database Setup with Prisma
-
-### 1. Install Dependencies
-
-From the `server/` directory:
-
-```bash
+# Server
 cd server
 npm install
-```
-
-### 2. Configure Database Connection
-
-Update the `.env` file in the `server/` directory with your database URL:
-
-```env
-DATABASE_URL="postgresql://user:password@localhost:5432/cookcraft"
-# or for Supabase:
-DATABASE_URL="postgresql://user:password@db.supabase.co:5432/postgres"
-```
-
-### 3. Run Prisma Migrations
-
-Initialize and apply database migrations:
-
-```bash
-# Generate Prisma Client
-npx prisma generate
-
-# Create/Update database schema
-npx prisma migrate dev --name init
-
-# Or apply existing migrations
-npx prisma migrate deploy
-```
-
-### 4. Seed the Database (Optional)
-
-If you have seed data:
-
-```bash
-npx prisma db seed
-```
-
-### 5. View Database in Prisma Studio
-
-To visualize and manage your database:
-
-```bash
-npx prisma studio
-```
-
-This opens a web interface at `http://localhost:5555`
-
----
-
-## 🖥️ Frontend Setup
-
-### 1. Install Dependencies
-
-From the `client/` directory:
-
-```bash
-cd client
-npm install
-```
-
-### 2. Configure Environment Variables
-
-Create a `.env.local` file in the `client/` directory:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-### 3. Run Development Server
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-The frontend will be available at `http://localhost:3000`
-
-### 4. Build for Production
-
-```bash
-npm run build
-npm run start
-```
-
----
-
-## ⚙️ Backend Setup
-
-### 1. Install Dependencies
-
-From the `server/` directory:
-
-```bash
-cd server
-npm install
-```
-
-### 2. Configure Environment Variables
-
-Create a `.env` file in the `server/` directory:
-
-```env
-DATABASE_URL="postgresql://user:password@localhost:5432/cookcraft"
-PORT=5000
-NODE_ENV=development
-SUPABASE_URL=your_supabase_url
-SUPABASE_ANON_KEY=your_supabase_anon_key
-JWT_SECRET=your_jwt_secret
-```
-
-### 3. Run Prisma Migrations
-
-```bash
-npx prisma migrate dev --name init
-```
-
-### 4. Start Development Server
-
-```bash
-npm run dev
-# or
-npm start
-```
-
-The backend API will be available at `http://localhost:5000`
-
-### 5. Build for Production
-
-```bash
-npm run build
-npm start
-```
-
----
-
-## 🔄 Complete Setup Flow
-
-Here's the recommended order to get everything running:
-
-```bash
-# 1. Clone repository
-git clone https://github.com/Yash-Javnjal/CookCraft.git
-cd CookCraft
-
-# 2. Setup Database with Prisma
-cd server
-npm install
-# Configure .env with DATABASE_URL
+# Configure .env with DATABASE_URL, SUPABASE_URL, SUPABASE_ANON_KEY
 npx prisma generate
 npx prisma migrate dev --name init
-npx prisma studio  # (optional, to verify database)
+npm run dev                          # → http://localhost:5000
 
-# 3. Start Backend
-npm run dev
-
-# 4. In a new terminal, setup Frontend
+# Client (new terminal)
 cd ../client
 npm install
-# Configure .env.local with API and Supabase URLs
-npm run dev
-
-# Frontend will be at http://localhost:3000
-# Backend API at http://localhost:5000
-# Prisma Studio at http://localhost:5555
+# Configure .env with NEXT_PUBLIC_API_URL, NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY
+npm run dev                          # → http://localhost:3000
 ```
 
 ---
+## License
 
-## 📈 Development Roadmap
+MIT
 
-### MVP (Current Phase)
 
-* Ingredient Search
-* Match Percentage Algorithm
-* Recipe Listing
-* Recipe Details
-* Authentication
-* Favorites
-* Responsive Design
-* Deployment
 
-### Future Releases
-
-* AI Recipe Generation
-* Fridge Image Recognition
-* Meal Planning
-* Shopping List Generation
-* Personalized Recommendations
-
----
-
-## 🎯 Project Goals
-
-* Reduce food waste
-* Simplify meal discovery
-* Provide a fast and intuitive cooking experience
-* Build a scalable recipe intelligence platform
-
----
-
-## 👨‍💻 Author
-
-**Yash Javanjal**
-
-Building modern full-stack applications with a focus on scalable architecture, developer experience, and real-world problem solving.
-
-GitHub:
-https://github.com/Yash-Javnjal
-
----
-
-> CookCraft transforms everyday ingredients into discoverable meals, making home cooking simpler, smarter, and more accessible.
